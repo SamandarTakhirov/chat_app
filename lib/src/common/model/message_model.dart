@@ -37,6 +37,7 @@ class MessageModel {
         "message": message,
       };
 
+
   @override
   int get hashCode => id.hashCode;
 
