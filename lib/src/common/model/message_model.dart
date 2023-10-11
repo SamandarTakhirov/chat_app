@@ -5,7 +5,7 @@ class MessageModel {
   final DateTime createAt;
 
   MessageModel(
-      { this.id="",
+      {this.id = "",
       required this.userId,
       required this.message,
       final DateTime? createAt})
@@ -22,9 +22,6 @@ class MessageModel {
         message: this.message,
       );
 
-
-
-
   factory MessageModel.fromJson(Map<String, Object?> json) => MessageModel(
         id: json["id"] as String,
         userId: json["userId"] as String,
@@ -36,8 +33,6 @@ class MessageModel {
         "userId": userId,
         "message": message,
       };
-
-
 
   @override
   int get hashCode => id.hashCode;

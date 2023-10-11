@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import '/src/common/constants/api_const.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+
+import '../model/user_model.dart';
 
  class DatabaseService{
   const DatabaseService();
@@ -27,4 +33,29 @@ import 'package:firebase_database/firebase_database.dart';
     required String id,
     required Map<String,Object?>json,
 })=> _database.ref(dataPath).child(id).update(json);
-}
+
+
+  static Future<bool> storeUser(String email, String password, String username, String uid) async {
+    try {
+      final folder = _database.ref(ApiConsts.userPath).child(uid);
+      final member = UserModel(id: uid, name: username, email: email, password: password);
+      await folder.set(member.toJson());
+      return true;
+    } catch(e) {
+      debugPrint("DB ERROR: $e");
+      return false;
+    }
+  }
+
+  static Future<UserModel?> readUser(String uid) async {
+    try {
+      final data = _database.ref(ApiConsts.userPath).child(uid).get();
+      final member = UserModel.fromJson(jsonDecode(jsonEncode(data)) as Map<String, Object>);
+      return member;
+    } catch(e) {
+      debugPrint("DB ERROR: $e");
+      return null;
+    }
+  }
+
+ }

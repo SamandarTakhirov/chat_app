@@ -39,6 +39,12 @@ class UserModel {
   @override
   int get hashCode => id.hashCode;
 
+
+  @override
+  String toString() {
+    return 'UserModel{id: $id, name: $name, email: $email, password: $password}';
+  }
+
   @override
   bool operator ==(Object other) =>
       other is UserModel &&

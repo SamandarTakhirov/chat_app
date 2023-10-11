@@ -1,11 +1,13 @@
-import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
+import '/src/common/service/auth_service.dart';
+import '/src/data/user_repository.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/model/message_model.dart';
-import '../../data/message_repostitory.dart';
+import '../../common/model/user_model.dart';
+import '../../data/message_repository.dart';
 import '../chat_screens/chat_screen.dart';
 import 'widgets/account_photo.dart';
-import 'widgets/my_listtile.dart';
+import 'widgets/my_listTile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,8 +17,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late IMessageRepository repository;
+  late IMessageRepository repositoryMessage;
+  late IUserRepository repositoryUser;
   late final Stream<MessageModel> messages;
+  late final Stream<UserModel> user;
 
   void openChatPage() => Navigator.push(
         context,
@@ -27,7 +31,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    repository = const MessageRepository();
+    repositoryMessage = const MessageRepository();
+    repositoryUser = const UserRepository();
     super.initState();
   }
 

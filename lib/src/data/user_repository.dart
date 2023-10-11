@@ -36,6 +36,7 @@ class UserRepository implements IUserRepository {
             }),
       );
 
+
   @override
   Future<void> createUser(UserModel user) =>
       _service.create(ApiConsts.userPath, user.toJson());
@@ -52,4 +53,9 @@ class UserRepository implements IUserRepository {
     id: user.id,
     json: user.toJson(),
   );
+
+  @override
+  String toString() {
+    return 'UserRepository{_service: $_service}';
+  }
 }

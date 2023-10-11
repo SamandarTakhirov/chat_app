@@ -1,7 +1,8 @@
+
+import '/src/common/service/database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-import 'db_service.dart';
 
 sealed class AuthService {
   static final auth = FirebaseAuth.instance;
@@ -14,7 +15,7 @@ sealed class AuthService {
       if (credential.user != null) {
         await credential.user!.updateDisplayName(username);
 
-        await DBService.storeUser(
+        await DatabaseService.storeUser(
             email, password, username, credential.user!.uid);
       }
 

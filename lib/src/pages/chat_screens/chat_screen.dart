@@ -1,5 +1,5 @@
-import 'package:chat_application_with_firebase/src/common/model/message_model.dart';
-import 'package:chat_application_with_firebase/src/data/message_repostitory.dart';
+import '/src/common/model/message_model.dart';
+import '/src/data/message_repository.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 
