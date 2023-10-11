@@ -47,7 +47,6 @@ sealed class AuthService {
   }
 
   static Future<bool> deleteAccount() async {
-    /// Har qanday appda delete account qilinganda avvalo qayta sign in qilishi talab qilinadi.
     try {
       if (auth.currentUser != null) {
         await auth.currentUser!.delete();

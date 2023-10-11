@@ -34,7 +34,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       nameController.text,
     );
     if (succes) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const HomePage(),

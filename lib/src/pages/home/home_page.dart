@@ -1,3 +1,4 @@
+import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/model/message_model.dart';
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
           itemBuilder: (context, index) {
             return MyListTile(
               onTap: openChatPage,
-              title: "Qobil",
+              title: AuthService.user.displayName!,
               subtitle: "sd",
               messageCount: 2,
               messageTime: 3,
