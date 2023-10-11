@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "671880926521",
+    "firebase_url": "https://chat-app-cdc16-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "chat-app-cdc16",
+    "storage_bucket": "chat-app-cdc16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671880926521:android:2621b3ec77bf9216c384e8",
+        "android_client_info": {
+          "package_name": "com.example.soliyev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9ukUvOTm9DsgDhktIWVh1KulYcaGmZqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671880926521:android:abd8249eb9ef91b4c384e8",
+        "android_client_info": {
+          "package_name": "dev.soliyev.chat_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9ukUvOTm9DsgDhktIWVh1KulYcaGmZqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671880926521:android:e7e10e3be18a7f37c384e8",
+        "android_client_info": {
+          "package_name": "dev.takhirov.chat_application_with_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9ukUvOTm9DsgDhktIWVh1KulYcaGmZqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
