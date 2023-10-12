@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
+  final String errorText;
+
   final bool isObscureText;
   final TextInputType textInputType;
   final TextInputAction textInputAction;
 
   const MyTextField({
     required this.hintText,
+    required this.errorText,
     required this.controller,
     required this.isObscureText,
     required this.textInputType,
@@ -23,7 +26,6 @@ class MyTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          hintText: hintText,
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               width: 2,
@@ -33,6 +35,26 @@ class MyTextField extends StatelessWidget {
               Radius.circular(20),
             ),
           ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 2,
+              color: Colors.transparent,
+            ),
+          ),
+          disabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 2,
+              color: Colors.transparent,
+            ),
+          ),
+          errorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 2,
+              color: Colors.red,
+            ),
+          ),
+          hintText: hintText,
+          errorText: errorText,
           border: const OutlineInputBorder(
             gapPadding: 50,
             borderRadius: BorderRadius.all(

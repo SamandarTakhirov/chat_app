@@ -28,12 +28,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
   }
 
   void onPressed() async {
-    bool succes = await AuthService.registration(
+    bool isCheck = await AuthService.registration(
       emailController.text,
       passwordController.text,
       nameController.text,
     );
-    if (succes) {
+    if (isCheck) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -67,12 +67,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
             MyTextField(
               controller: nameController,
               hintText: "Name",
+              errorText: "Invalid Name",
               isObscureText: false,
               textInputType: TextInputType.name,
               textInputAction: TextInputAction.next,
             ),
             MyTextField(
               controller: emailController,
+              errorText: "Invalid  Email",
               hintText: "Enter email address",
               isObscureText: false,
               textInputType: TextInputType.emailAddress,
@@ -80,6 +82,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             ),
             MyTextField(
               controller: passwordController,
+              errorText: "Invalid Password",
               hintText: "Password",
               isObscureText: false,
               textInputType: TextInputType.visiblePassword,

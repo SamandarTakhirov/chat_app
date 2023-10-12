@@ -24,11 +24,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void onPressed() async {
-    bool succes = await AuthService.login(
+    bool isCheck = await AuthService.login(
       emailController.text,
       passwordController.text,
     );
-    if (succes) {
+    if (isCheck) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -70,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             MyTextField(
               controller: emailController,
+              errorText: "Your Not Email",
               hintText: "Enter email address",
               isObscureText: false,
               textInputType: TextInputType.emailAddress,
@@ -77,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             MyTextField(
               controller: passwordController,
+              errorText: "Invalid Password",
               hintText: "Password",
               isObscureText: false,
               textInputType: TextInputType.visiblePassword,
