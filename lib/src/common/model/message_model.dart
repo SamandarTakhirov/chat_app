@@ -3,14 +3,14 @@ class ChatModel {
   final int userOne;
   final int userTwo;
   final String message;
-  final List<String> messages;
+  // final List<String> messages;
   final DateTime createdAt;
 
   ChatModel({
     this.id = "",
     this.userOne = 1,
     this.userTwo = 2,
-    required this.messages,
+    // required this.messages,
     required this.message,
     final DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime.now();
@@ -26,21 +26,21 @@ class ChatModel {
         id: this.id,
         userOne: this.userOne,
         message: this.message,
-        messages: this.messages,
+        // messages: this.messages,
         userTwo: this.userTwo,
         createdAt: createdAt,
       );
 
   factory ChatModel.fromJson(Map<String, Object?> json) => ChatModel(
         id: json["id"] as String,
-        messages: json["messages"] as List<String>,
+        // messages: json["messages"] as List<String>,
         message: json["message"] as String,
       );
 
   Map<String, Object?> toJson() => <String, Object?>{
         "id": id,
         "message": message,
-        "messages": messages,
+        // "messages": messages,
       };
 
   @override
@@ -50,6 +50,6 @@ class ChatModel {
       other is ChatModel &&
       runtimeType == other.runtimeType &&
       id == other.id &&
-      message == other.message &&
-      messages == other.messages;
+      message == other.message ;
+      // messages == other.messages;
 }

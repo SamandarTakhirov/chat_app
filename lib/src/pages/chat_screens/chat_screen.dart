@@ -180,7 +180,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     onPressed: () {
                       allMessage.add(textEditingController.text.trim());
                       ChatModel message = ChatModel(
-                        messages: allMessage,
+                        // messages: allMessage,
                         id: "2",
                         message: textEditingController.text.trim(),
                       );
