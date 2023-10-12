@@ -8,13 +8,13 @@ import '../common/model/message_model.dart';
 
 abstract interface class IMessageRepository {
   DatabaseReference queryMessage();
-  Stream<MessageModel> getAllData();
+  Stream<ChatModel> getAllData();
 
-  Future<void> createMessage(MessageModel message);
+  Future<void> createMessage(ChatModel message);
 
   Future<void> deleteMessage(String id);
 
-  Future<void> updateMessage(MessageModel message);
+  Future<void> updateMessage(ChatModel message);
 }
 
 class MessageRepository implements IMessageRepository {
@@ -24,31 +24,32 @@ class MessageRepository implements IMessageRepository {
   final DatabaseService _service;
 
   @override
-  Stream<MessageModel> getAllData() =>
-      _service.readAllData(ApiConsts.messagePath).transform(
-        StreamTransformer<DatabaseEvent, MessageModel>.fromHandlers(
+  Stream<ChatModel> getAllData() =>
+      _service.readAllData(ApiConsts.chatPath).transform(
+        StreamTransformer<DatabaseEvent, ChatModel>.fromHandlers(
             handleData: (data, sink) {
           for (final json in (data.snapshot.value as Map).values) {
             final message =
-                MessageModel.fromJson(Map<String, Object?>.from(json));
+                ChatModel.fromJson(Map<String, Object?>.from(json));
             sink.add(message);
           }
         }),
       );
 
   @override
-  Future<void> createMessage(MessageModel message) => _service.create(ApiConsts.messagePath, message.toJson());
+  Future<void> createMessage(ChatModel message) => _service.create(ApiConsts.chatPath, message.toJson());
 
   @override
-  DatabaseReference queryMessage() => _service.queryFromPath(ApiConsts.messagePath);
+  DatabaseReference queryMessage() => _service.queryFromPath(ApiConsts.chatPath);
 
   @override
-  Future<void> deleteMessage(String id) =>  _service.delete(ApiConsts.messagePath,id);
+  Future<void> deleteMessage(String id) =>  _service.delete(ApiConsts.chatPath,id);
 
   @override
-  Future<void> updateMessage(MessageModel message) => _service.update(
-    dataPath: ApiConsts.messagePath,
+  Future<void> updateMessage(ChatModel message) => _service.update(
+    dataPath: ApiConsts.chatPath,
     id: message.id,
+
     json: message.toJson(),
   );
 }

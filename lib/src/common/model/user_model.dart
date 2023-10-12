@@ -1,5 +1,3 @@
-
-
 class UserModel {
   final String id;
   final String name;
@@ -21,7 +19,6 @@ class UserModel {
           email: this.email,
           password: this.password);
 
-
   factory UserModel.fromJson(Map<String, Object?> json) => UserModel(
         id: json["id"] as String,
         name: json["name"] as String,
@@ -29,7 +26,7 @@ class UserModel {
         password: json["password"] as String,
       );
 
-  Map<String, Object?> toJson( ) => <String, Object?>{
+  Map<String, Object?> toJson() => <String, Object?>{
         "id": id,
         "name": name,
         "email": email,
@@ -44,6 +41,8 @@ class UserModel {
   String toString() {
     return 'UserModel{id: $id, name: $name, email: $email, password: $password}';
   }
+
+
 
   @override
   bool operator ==(Object other) =>

@@ -21,8 +21,8 @@ class MyListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      visualDensity: VisualDensity.comfortable,
       onTap: onTap,
-      focusColor: Colors.red,
       leading: const AccountPhoto(),
       contentPadding: const EdgeInsets.symmetric(horizontal: 20),
       title: Text(
@@ -49,11 +49,12 @@ class MyListTile extends StatelessWidget {
           ),
           CircleAvatar(
             backgroundColor: Colors.red,
-            minRadius: 15,
-            maxRadius: 15,
+            minRadius: 14,
+            maxRadius: 14,
             child: Text(
               "$messageCount",
               style: const TextStyle(
+                fontSize: 12,
                 color: Colors.white,
               ),
             ),

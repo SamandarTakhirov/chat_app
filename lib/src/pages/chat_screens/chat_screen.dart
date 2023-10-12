@@ -1,8 +1,8 @@
-import '/src/common/model/message_model.dart';
-import '/src/data/message_repository.dart';
+import 'package:chat_application_with_firebase/src/common/model/message_model.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/chat_repository.dart';
 import '../home/widgets/account_photo.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -15,6 +15,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   late IMessageRepository repository;
   late TextEditingController textEditingController;
+  List<String> allMessage = [];
 
   @override
   void initState() {
@@ -58,19 +59,19 @@ class _ChatScreenState extends State<ChatScreen> {
             child: FirebaseAnimatedList(
               reverse: true,
               sort: (a, b) {
-                final aValue = MessageModel.fromJson(
+                final aValue = ChatModel.fromJson(
                   Map<String, Object?>.from(a.value as Map),
                 );
 
-                final bValue = MessageModel.fromJson(
+                final bValue = ChatModel.fromJson(
                   Map<String, Object?>.from(b.value as Map),
                 );
 
-                return bValue.createAt.compareTo(aValue.createAt);
+                return aValue.createdAt.compareTo(bValue.createdAt);
               },
               query: repository.queryMessage(),
               itemBuilder: (context, snapshot, animation, index) {
-                final post = MessageModel.fromJson(
+                final post = ChatModel.fromJson(
                   Map<String, Object?>.from(snapshot.value as Map),
                 );
                 return ConstrainedBox(
@@ -82,29 +83,29 @@ class _ChatScreenState extends State<ChatScreen> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 3.0, horizontal: 10),
                     child: Align(
-                      alignment: post.userId == "2"
+                      alignment: post.userOne == 1
                           ? Alignment.bottomLeft
                           : Alignment.bottomRight,
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                             topLeft: const Radius.circular(15),
-                            bottomLeft: post.userId == "2"
+                            bottomLeft: post.userOne == 1
                                 ? const Radius.circular(0)
                                 : const Radius.circular(15),
                             topRight: const Radius.circular(15),
-                            bottomRight: post.userId == "2"
+                            bottomRight: post.userOne == 1
                                 ? const Radius.circular(15)
                                 : const Radius.circular(0),
                           ),
-                          color: post.userId == "2"
+                          color: post.userOne == 1
                               ? const Color(0xFFF5F5F5)
                               : const Color(0xFF246BFD),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8),
                           child: Column(
-                            crossAxisAlignment: post.userId == "2"
+                            crossAxisAlignment: post.userOne == 1
                                 ? CrossAxisAlignment.start
                                 : CrossAxisAlignment.end,
                             mainAxisSize: MainAxisSize.min,
@@ -112,19 +113,19 @@ class _ChatScreenState extends State<ChatScreen> {
                               Text(
                                 post.message,
                                 style: TextStyle(
-                                  color: post.userId == "2"
+                                  color: post.userOne == 1
                                       ? Colors.black
                                       : Colors.white,
                                   fontSize: 17,
                                 ),
                               ),
                               Text(
-                                "${post.createAt.hour}"
-                                ":"
-                                "${post.createAt.minute}",
+                                "${"${post.createdAt.hour}".padLeft(
+                                    2, "0")}:${"${post.createdAt.minute}"
+                                    .padLeft(2, "0")}",
                                 textAlign: TextAlign.end,
                                 style: TextStyle(
-                                  color: post.userId == "2"
+                                  color: post.userOne == 1
                                       ? Colors.black
                                       : Colors.white,
                                   fontSize: 10,
@@ -177,8 +178,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   IconButton(
                     onPressed: () {
-                      MessageModel message = MessageModel(
-                        userId: "1",
+                      allMessage.add(textEditingController.text.trim());
+                      ChatModel message = ChatModel(
+                        messages: allMessage,
+                        id: "2",
                         message: textEditingController.text.trim(),
                       );
                       textEditingController.clear();

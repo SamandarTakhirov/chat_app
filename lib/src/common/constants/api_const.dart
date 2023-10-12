@@ -1,6 +1,6 @@
 class ApiConsts {
   const ApiConsts._();
 
-  static const messagePath = 'message';
+  static const chatPath = 'chat';
   static const userPath = 'user';
 }

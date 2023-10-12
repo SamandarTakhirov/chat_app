@@ -1,47 +1,55 @@
-class MessageModel {
+class ChatModel {
   final String id;
-  final String userId;
+  final int userOne;
+  final int userTwo;
   final String message;
-  final DateTime createAt;
+  final List<String> messages;
+  final DateTime createdAt;
 
-  MessageModel(
-      {this.id = "",
-      required this.userId,
-      required this.message,
-      final DateTime? createAt})
-      : createAt = createAt ?? DateTime.now();
+  ChatModel({
+    this.id = "",
+    this.userOne = 1,
+    this.userTwo = 2,
+    required this.messages,
+    required this.message,
+    final DateTime? createdAt,
+  }) : createdAt = createdAt ?? DateTime.now();
 
-  MessageModel copyWith({
+  ChatModel copyWith({
     String? id,
-    String? userId,
+    int? userOne,
+    int? userTwo,
     String? message,
+    List<Map<int, String>>? messages,
   }) =>
-      MessageModel(
+      ChatModel(
         id: this.id,
-        userId: this.userId,
+        userOne: this.userOne,
         message: this.message,
+        messages: this.messages,
+        userTwo: this.userTwo,
+        createdAt: createdAt,
       );
 
-  factory MessageModel.fromJson(Map<String, Object?> json) => MessageModel(
+  factory ChatModel.fromJson(Map<String, Object?> json) => ChatModel(
         id: json["id"] as String,
-        userId: json["userId"] as String,
+        messages: json["messages"] as List<String>,
         message: json["message"] as String,
       );
 
   Map<String, Object?> toJson() => <String, Object?>{
         "id": id,
-        "userId": userId,
         "message": message,
+        "messages": messages,
       };
 
   @override
   int get hashCode => id.hashCode;
 
   bool operator ==(Object other) =>
-      other is MessageModel &&
+      other is ChatModel &&
       runtimeType == other.runtimeType &&
       id == other.id &&
-      userId == other.userId &&
       message == other.message &&
-      createAt == other.createAt;
+      messages == other.messages;
 }

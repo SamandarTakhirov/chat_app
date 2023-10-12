@@ -1,6 +1,6 @@
+import 'package:chat_application_with_firebase/src/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../pages/auth/login/login_page.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const HomePage(),
     );
   }
 }

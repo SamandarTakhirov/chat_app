@@ -32,7 +32,7 @@ import '../model/user_model.dart';
     required String dataPath,
     required String id,
     required Map<String,Object?>json,
-})=> _database.ref(dataPath).child(id).update(json);
+})=> _database.ref(dataPath).child(id.toString()).update(json);
 
 
   static Future<bool> storeUser(String email, String password, String username, String uid) async {
