@@ -41,7 +41,7 @@ class MyListTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            "$messageTime min ago",
+            messageTime == 0 ? "Just now": "$messageTime min ago",
             style: const TextStyle(
               fontSize: 12,
               color: Color(0xFF797C7B),

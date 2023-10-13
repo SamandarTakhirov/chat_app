@@ -1,9 +1,10 @@
+import 'package:firebase_database/ui/firebase_animated_list.dart';
+
+import '../../common/model/message_model.dart';
 import '/src/common/service/auth_service.dart';
 import '/src/data/user_repository.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/model/message_model.dart';
-import '../../common/model/user_model.dart';
 import '../../data/message_repository.dart';
 import '../chat_screens/chat_screen.dart';
 import 'widgets/account_photo.dart';
@@ -19,8 +20,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late IMessageRepository repositoryMessage;
   late IUserRepository repositoryUser;
-  late final Stream<MessageModel> messages;
-  late final Stream<UserModel> user;
 
   void openChatPage() => Navigator.push(
         context,
@@ -67,17 +66,32 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SafeArea(
-        child: ListView.builder(
-          itemBuilder: (context, index) {
+        child: FirebaseAnimatedList(
+          sort: (a, b) {
+            final aValue = MessageModel.fromJson(
+              Map<String, Object?>.from(a.value as Map),
+            );
+
+            final bValue = MessageModel.fromJson(
+              Map<String, Object?>.from(b.value as Map),
+            );
+
+            return bValue.createAt.compareTo(aValue.createAt);
+          },
+          itemBuilder: (context, snapshot, animation, index) {
+            final post = MessageModel.fromJson(
+              Map<String, Object?>.from(snapshot.value as Map),
+            );
+
             return MyListTile(
               onTap: openChatPage,
               title: AuthService.user.displayName!,
-              subtitle: "sd",
-              messageCount: 2,
-              messageTime: 3,
+              subtitle: post.message,
+              messageCount: post.message.length,
+              messageTime: DateTime.now().minute - post.createAt.minute,
             );
           },
-          itemCount: 1,
+          query: repositoryMessage.queryMessage(),
         ),
       ),
     );

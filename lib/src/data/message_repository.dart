@@ -8,6 +8,7 @@ import '../common/model/message_model.dart';
 
 abstract interface class IMessageRepository {
   DatabaseReference queryMessage();
+
   Stream<MessageModel> getAllData();
 
   Future<void> createMessage(MessageModel message);
@@ -18,7 +19,6 @@ abstract interface class IMessageRepository {
 }
 
 class MessageRepository implements IMessageRepository {
-
   const MessageRepository() : _service = const DatabaseService();
 
   final DatabaseService _service;
@@ -37,18 +37,22 @@ class MessageRepository implements IMessageRepository {
       );
 
   @override
-  Future<void> createMessage(MessageModel message) => _service.create(ApiConsts.messagePath, message.toJson());
+  Future<void> createMessage(MessageModel message) =>
+      _service.create(ApiConsts.messagePath, message.toJson());
 
   @override
-  DatabaseReference queryMessage() => _service.queryFromPath(ApiConsts.messagePath);
+  DatabaseReference queryMessage() =>
+      _service.queryFromPath(ApiConsts.messagePath);
 
   @override
-  Future<void> deleteMessage(String id) =>  _service.delete(ApiConsts.messagePath,id);
+  Future<void> deleteMessage(String id) =>
+      _service.delete(ApiConsts.messagePath, id);
 
   @override
   Future<void> updateMessage(MessageModel message) => _service.update(
-    dataPath: ApiConsts.messagePath,
-    id: message.id,
-    json: message.toJson(),
-  );
+        dataPath: ApiConsts.messagePath,
+        id: message.id,
+        json: message.toJson(),
+      );
+
 }
