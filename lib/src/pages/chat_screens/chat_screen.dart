@@ -1,4 +1,4 @@
-
+import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
 
 import '/src/common/model/message_model.dart';
 import '/src/data/message_repository.dart';
@@ -10,8 +10,10 @@ import 'widgets/write_text.dart';
 
 class ChatScreen extends StatefulWidget {
   final String name;
+  final String id;
 
   const ChatScreen({
+    required this.id,
     required this.name,
     super.key,
   });
@@ -26,14 +28,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    repository = const MessageRepository();
+    repository = MessageRepository(widget.id);
     textEditingController = TextEditingController();
     super.initState();
   }
 
-  void sendMessage() {
+  Future<void> sendMessage() async {
     final message = MessageModel(
-      userId: "1",
+      userId: AuthService.auth.currentUser!.uid,
       message: textEditingController.text.trim(),
     );
     if (textEditingController.text.isNotEmpty) {

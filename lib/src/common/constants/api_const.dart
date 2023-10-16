@@ -1,6 +1,6 @@
 class ApiConsts {
   const ApiConsts._();
 
-  static const messagePath = 'message';
+  static String messagePath(String chatPath) => "/message/$chatPath/chats";
   static const userPath = 'user';
 }

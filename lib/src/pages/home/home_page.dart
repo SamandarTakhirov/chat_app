@@ -1,4 +1,3 @@
-
 import 'package:chat_application_with_firebase/src/common/model/user_model.dart';
 import 'package:chat_application_with_firebase/src/pages/home/widgets/my_listtile.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -23,10 +22,10 @@ class _HomePageState extends State<HomePage> {
   late IMessageRepository repositoryMessage;
   late IUserRepository repositoryUser;
 
-  void openChatPage(String name) => Navigator.push(
+  void openChatPage(String name, String id) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ChatScreen(name: name),
+          builder: (context) => ChatScreen(name: name, id: id),
         ),
       );
 
@@ -39,7 +38,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    repositoryMessage = const MessageRepository();
     repositoryUser = const UserRepository();
     super.initState();
   }
@@ -54,7 +52,7 @@ class _HomePageState extends State<HomePage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ChatScreen(name: ""),
+                builder: (context) => const ChatScreen(name: "", id: '',),
               ),
             );
           });
@@ -100,6 +98,7 @@ class _HomePageState extends State<HomePage> {
               Map<String, Object?>.from(snapshot.value as Map),
             );
 
+            final id = [post.uid, AuthService.auth.currentUser!.uid]..sort();
             return post.email != AuthService.auth.currentUser!.email
                 ? MyListTile(
                     widget: CircleAvatar(
@@ -111,7 +110,10 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.white,
                       ),
                     ),
-                    onTap: () => openChatPage(post.name!),
+                    onTap: () => openChatPage(
+                      post.name!,
+                      id.join(),
+                    ),
                     title: post.name ?? "",
                     subtitle: post.email,
                     messageCount: 33,

@@ -7,6 +7,8 @@ import '../common/model/message_model.dart';
 import '../common/service/db_service.dart';
 
 abstract interface class IMessageRepository {
+  final String chatPath;
+  const IMessageRepository(this.chatPath);
   DatabaseReference queryMessage();
   Stream<MessageModel> getAllData();
 
@@ -17,15 +19,15 @@ abstract interface class IMessageRepository {
   Future<void> updateMessage(MessageModel message);
 }
 
-class MessageRepository implements IMessageRepository {
+class MessageRepository extends IMessageRepository {
 
-  const MessageRepository() : _service = const DatabaseService();
+  const MessageRepository(super.chatPath) : _service = const DatabaseService();
 
   final DatabaseService _service;
 
   @override
   Stream<MessageModel> getAllData() =>
-      _service.readAllData(ApiConsts.messagePath).transform(
+      _service.readAllData(ApiConsts.messagePath(chatPath)).transform(
         StreamTransformer<DatabaseEvent, MessageModel>.fromHandlers(
             handleData: (data, sink) {
           for (final json in (data.snapshot.value as Map).values) {
@@ -37,17 +39,17 @@ class MessageRepository implements IMessageRepository {
       );
 
   @override
-  Future<void> createMessage(MessageModel message) => _service.create(ApiConsts.messagePath, message.toJson());
+  Future<void> createMessage(MessageModel message) => _service.create(ApiConsts.messagePath(chatPath), message.toJson());
 
   @override
-  DatabaseReference queryMessage() => _service.queryFromPath(ApiConsts.messagePath);
+  DatabaseReference queryMessage() => _service.queryFromPath(ApiConsts.messagePath(chatPath));
 
   @override
-  Future<void> deleteMessage(String id) =>  _service.delete(ApiConsts.messagePath,id);
+  Future<void> deleteMessage(String id) =>  _service.delete(ApiConsts.messagePath(chatPath),id);
 
   @override
   Future<void> updateMessage(MessageModel message) => _service.update(
-    dataPath: ApiConsts.messagePath,
+    dataPath: ApiConsts.messagePath(chatPath),
     id: message.id,
     json: message.toJson(),
   );
