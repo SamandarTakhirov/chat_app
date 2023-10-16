@@ -77,7 +77,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 onPressed: () {
                   AuthService.logOut();
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const LoginPage(),
@@ -105,7 +105,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 onPressed: () {
                   AuthService.deleteAccount();
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const RegistrationPage(),
