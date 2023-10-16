@@ -49,9 +49,9 @@ class ProfilePage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      const Text(
-                        "Samandar",
-                        style: TextStyle(
+                      Text(
+                        AuthService.auth.currentUser!.displayName!,
+                        style: const TextStyle(
                           color: Color(0xFF246BFD),
                           fontSize: 24,
                           fontWeight: FontWeight.w700,

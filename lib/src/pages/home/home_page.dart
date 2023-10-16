@@ -47,16 +47,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF246BFD),
-        onPressed: () {
-          setState(() {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ChatScreen(name: "", id: '',),
-              ),
-            );
-          });
-        },
+        onPressed: () {},
         child: const Icon(
           Icons.edit,
           color: Colors.white,
