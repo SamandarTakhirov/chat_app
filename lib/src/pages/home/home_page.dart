@@ -23,18 +23,18 @@ class _HomePageState extends State<HomePage> {
   late IUserRepository repositoryUser;
 
   void openChatPage(String name, String id) => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ChatScreen(name: name, id: id),
-        ),
-      );
+    context,
+    MaterialPageRoute(
+      builder: (context) => ChatScreen(name: name, id: id),
+    ),
+  );
 
   void openProfilePage() => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const ProfilePage(),
-        ),
-      );
+    context,
+    MaterialPageRoute(
+      builder: (context) => const ProfilePage(),
+    ),
+  );
 
   @override
   void initState() {
@@ -92,24 +92,24 @@ class _HomePageState extends State<HomePage> {
             final id = [post.uid, AuthService.auth.currentUser!.uid]..sort();
             return post.email != AuthService.auth.currentUser!.email
                 ? MyListTile(
-                    widget: CircleAvatar(
-                      maxRadius: 25,
-                      minRadius: 25,
-                      backgroundColor: Colors.primaries[index % 15],
-                      child: const Icon(
-                        Icons.person_2_rounded,
-                        color: Colors.white,
-                      ),
-                    ),
-                    onTap: () => openChatPage(
-                      post.name!,
-                      id.join(),
-                    ),
-                    title: post.name ?? "",
-                    subtitle: post.email,
-                    messageCount: 33,
-                    messageTime: 32,
-                  )
+              widget: CircleAvatar(
+                maxRadius: 25,
+                minRadius: 25,
+                backgroundColor: Colors.primaries[index % 15],
+                child: const Icon(
+                  Icons.person_2_rounded,
+                  color: Colors.white,
+                ),
+              ),
+              onTap: () => openChatPage(
+                post.name!,
+                id.join(),
+              ),
+              title: post.name ?? "",
+              subtitle: post.email,
+              messageCount: 33,
+              messageTime: 32,
+            )
                 : const SizedBox.shrink();
           },
           query: repositoryUser.queryUser(),
