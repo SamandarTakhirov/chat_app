@@ -28,7 +28,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void sendMessage() {
     final message = MessageModel(
-      userId: "2",
+      userId: "1",
       message: textEditingController.text.trim(),
     );
     if (textEditingController.text.isNotEmpty) {
@@ -79,7 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
         centerTitle: true,
         title:  Text(
-          "${AuthService.auth.currentUser!.displayName}",
+          "${AuthService.user}",
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w600,
@@ -123,7 +123,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 3.0, horizontal: 10),
                     child: Align(
-                      alignment: post.userId == "1"
+                      alignment: post.userId == "2"
                           ? Alignment.bottomLeft
                           : Alignment.bottomRight,
                       child: GestureDetector(
@@ -135,7 +135,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  post.userId == "2"
+                                  post.userId == "1"
                                       ? IconButton(
                                           onPressed: () => showModalBottomSheet(
                                             context: context,
@@ -198,22 +198,22 @@ class _ChatScreenState extends State<ChatScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
                               topLeft: const Radius.circular(15),
-                              bottomLeft: post.userId == "1"
+                              bottomLeft: post.userId == "2"
                                   ? const Radius.circular(0)
                                   : const Radius.circular(15),
                               topRight: const Radius.circular(15),
-                              bottomRight: post.userId == "1"
+                              bottomRight: post.userId == "2"
                                   ? const Radius.circular(15)
                                   : const Radius.circular(0),
                             ),
-                            color: post.userId == "1"
+                            color: post.userId == "2"
                                 ? const Color(0xFFF5F5F5)
                                 : const Color(0xFF246BFD),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8),
                             child: Column(
-                              crossAxisAlignment: post.userId == "1"
+                              crossAxisAlignment: post.userId == "2"
                                   ? CrossAxisAlignment.start
                                   : CrossAxisAlignment.end,
                               mainAxisSize: MainAxisSize.min,
@@ -221,7 +221,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 Text(
                                   post.message,
                                   style: TextStyle(
-                                    color: post.userId == "1"
+                                    color: post.userId == "2"
                                         ? Colors.black
                                         : Colors.white,
                                     fontSize: 17,
@@ -235,7 +235,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       post.edited ? "edited" : "",
                                       textAlign: TextAlign.end,
                                       style: TextStyle(
-                                        color: post.userId == "1"
+                                        color: post.userId == "2"
                                             ? Colors.black
                                             : Colors.white,
                                         fontSize: 10,
@@ -245,7 +245,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       " ${"${post.createAt.hour}".padLeft(2, "0")}:${"${post.createAt.minute}".padLeft(2, "0")}",
                                       textAlign: TextAlign.end,
                                       style: TextStyle(
-                                        color: post.userId == "1"
+                                        color: post.userId == "2"
                                             ? Colors.black
                                             : Colors.white,
                                         fontSize: 10,

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 
 import '../common/model/user_model.dart';
-import '../common/service/database_service.dart';
+import '../common/service/db_service.dart';
 import '/src/common/constants/api_const.dart';
 
 
