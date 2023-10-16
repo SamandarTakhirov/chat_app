@@ -2,7 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-import 'db_service.dart';
+import 'database_service.dart';
 
 
 sealed class AuthService {

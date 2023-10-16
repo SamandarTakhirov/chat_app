@@ -4,7 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 
 import '../common/constants/api_const.dart';
 import '../common/model/message_model.dart';
-import '../common/service/db_service.dart';
+import '../common/service/database_service.dart';
 
 abstract interface class IMessageRepository {
   final String chatPath;

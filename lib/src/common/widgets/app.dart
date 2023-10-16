@@ -15,7 +15,7 @@ class App extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       // ignore: unnecessary_null_comparison
-      home: (AuthService.user==null)? const HomePage() : const LoginPage(),
+      home: (AuthService.user!=null)? const HomePage() : const LoginPage(),
     );
   }
 }
