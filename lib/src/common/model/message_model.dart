@@ -47,6 +47,7 @@ class MessageModel {
   @override
   int get hashCode => id.hashCode;
 
+  @override
   bool operator ==(Object other) =>
       other is MessageModel &&
       runtimeType == other.runtimeType &&

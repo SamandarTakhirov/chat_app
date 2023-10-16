@@ -13,11 +13,6 @@ class DBService {
           .ref(dataPath)
           .onValue
           .asBroadcastStream();
-  Stream<DatabaseEvent> readAllUsers(String dataPath) =>
-      _database
-          .ref(dataPath)
-          .onValue
-          .asBroadcastStream();
 
   DatabaseReference queryFromPath(String dataPath) => _database.ref(dataPath);
 

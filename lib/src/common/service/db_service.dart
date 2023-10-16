@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
-
 import '/src/common/constants/api_const.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +58,4 @@ import '../model/user_model.dart';
       return null;
     }
   }
-
-
-
  }
