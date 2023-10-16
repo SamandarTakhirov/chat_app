@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:chat_application_with_firebase/src/common/model/message_model.dart';
+import 'package:chat_application_with_firebase/src/common/model/user_model.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class DBService {
@@ -13,11 +13,16 @@ class DBService {
           .ref(dataPath)
           .onValue
           .asBroadcastStream();
+  Stream<DatabaseEvent> readAllUsers(String dataPath) =>
+      _database
+          .ref(dataPath)
+          .onValue
+          .asBroadcastStream();
 
   DatabaseReference queryFromPath(String dataPath) => _database.ref(dataPath);
 
   Future<void> create(String dataPath,
-      Map<String, Object?> json, {required MessageModel messageModel,}) async {
+      Map<String, Object?> json, {required UserModel userModel,}) async {
     final id = _database
         .ref(dataPath)
         .push()

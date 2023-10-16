@@ -1,6 +1,6 @@
+import 'package:chat_application_with_firebase/src/common/model/user_model.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 
-import '../../common/model/message_model.dart';
 import '../profile/profile_page.dart';
 import '/src/common/service/auth_service.dart';
 import '/src/data/user_repository.dart';
@@ -94,31 +94,31 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SafeArea(
         child: FirebaseAnimatedList(
-          sort: (a, b) {
-            final aValue = MessageModel.fromJson(
-              Map<String, Object?>.from(a.value as Map),
-            );
-
-            final bValue = MessageModel.fromJson(
-              Map<String, Object?>.from(b.value as Map),
-            );
-
-            return bValue.createAt.compareTo(aValue.createAt);
-          },
+          // sort: (a, b) {
+          //   final aValue = User.fromJson(
+          //     Map<String, Object?>.from(a.value as Map),
+          //   );
+          //
+          //   final bValue = MessageModel.fromJson(
+          //     Map<String, Object?>.from(b.value as Map),
+          //   );
+          //
+          //   return bValue.createAt.compareTo(aValue.createAt);
+          // },/**/
           itemBuilder: (context, snapshot, animation, index) {
-            final post = MessageModel.fromJson(
+            final post = UserModel.fromJson(
               Map<String, Object?>.from(snapshot.value as Map),
             );
 
             return MyListTile(
               onTap: openChatPage,
-              title: "${AuthService.auth.currentUser?.displayName}",
-              subtitle: post.message,
-              messageCount: post.message.length,
-              messageTime: DateTime.now().minute - post.createAt.minute,
+              title: "${AuthService.currentUser!.displayName}",
+              subtitle: post.email,
+              messageCount: 33,
+              messageTime:32,
             );
           },
-          query: repositoryMessage.queryMessage(),
+            query: repositoryUser.queryUser(),
         ),
       ),
     );

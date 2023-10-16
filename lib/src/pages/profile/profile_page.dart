@@ -1,4 +1,6 @@
 import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
+import 'package:chat_application_with_firebase/src/pages/auth/login/login_page.dart';
+import 'package:chat_application_with_firebase/src/pages/auth/registration/registration_page.dart';
 import 'package:flutter/material.dart';
 
 import '../home/widgets/account_photo.dart';
@@ -73,7 +75,17 @@ class ProfilePage extends StatelessWidget {
                   minimumSize: const Size(double.infinity, 60),
                   backgroundColor: const Color(0xFF246BFD),
                 ),
-                onPressed: () => AuthService.logOut(),
+                onPressed: () {
+
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          AuthService.logOut();
+                          return const LoginPage();
+                        },
+                      ));
+                },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -94,7 +106,16 @@ class ProfilePage extends StatelessWidget {
                   minimumSize: const Size(double.infinity, 60),
                   backgroundColor: const Color(0xFF246BFD),
                 ),
-                onPressed: () => AuthService.deleteAccount(),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          AuthService.deleteAccount();
+                          return const RegistrationPage();
+                        },
+                      ));
+                },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -1,3 +1,4 @@
+import 'package:chat_application_with_firebase/src/common/model/user_model.dart';
 import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
 import 'package:chat_application_with_firebase/src/data/user_repository.dart';
 import 'package:chat_application_with_firebase/src/pages/home/home_page.dart';
@@ -28,12 +29,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
   }
 
   void onPressed() async {
-    bool succes = await AuthService.registration(
+    UserModel? success = await AuthService.registration(
       emailController.text,
       passwordController.text,
       nameController.text,
     );
-    if (succes) {
+    if (success!=null) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
