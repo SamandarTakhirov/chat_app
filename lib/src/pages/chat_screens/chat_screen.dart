@@ -1,4 +1,4 @@
-import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
+
 
 import '/src/common/model/message_model.dart';
 import '/src/data/message_repository.dart';
@@ -9,7 +9,12 @@ import '../home/widgets/account_photo.dart';
 import 'widgets/write_text.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+  final String name;
+
+  const ChatScreen({
+    required this.name,
+    super.key,
+  });
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -78,8 +83,8 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ),
         centerTitle: true,
-        title:  Text(
-          "${AuthService.user}",
+        title: Text(
+          widget.name,
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w600,

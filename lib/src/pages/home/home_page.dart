@@ -1,4 +1,6 @@
+
 import 'package:chat_application_with_firebase/src/common/model/user_model.dart';
+import 'package:chat_application_with_firebase/src/pages/home/widgets/my_listtile.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 import '../profile/profile_page.dart';
@@ -9,7 +11,6 @@ import 'package:flutter/material.dart';
 import '../../data/message_repository.dart';
 import '../chat_screens/chat_screen.dart';
 import 'widgets/account_photo.dart';
-import 'widgets/my_listTile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,10 +23,10 @@ class _HomePageState extends State<HomePage> {
   late IMessageRepository repositoryMessage;
   late IUserRepository repositoryUser;
 
-  void openChatPage() => Navigator.push(
+  void openChatPage(String name) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const ChatScreen(),
+          builder: (context) => ChatScreen(name: name),
         ),
       );
 
@@ -53,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ChatScreen(),
+                builder: (context) => const ChatScreen(name: ""),
               ),
             );
           });
@@ -94,31 +95,31 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SafeArea(
         child: FirebaseAnimatedList(
-          // sort: (a, b) {
-          //   final aValue = User.fromJson(
-          //     Map<String, Object?>.from(a.value as Map),
-          //   );
-          //
-          //   final bValue = MessageModel.fromJson(
-          //     Map<String, Object?>.from(b.value as Map),
-          //   );
-          //
-          //   return bValue.createAt.compareTo(aValue.createAt);
-          // },/**/
           itemBuilder: (context, snapshot, animation, index) {
             final post = UserModel.fromJson(
               Map<String, Object?>.from(snapshot.value as Map),
             );
 
-            return MyListTile(
-              onTap: openChatPage,
-              title: AuthService.auth.currentUser!.displayName?? " ",
-              subtitle: post.email,
-              messageCount: 33,
-              messageTime:32,
-            );
+            return post.email != AuthService.auth.currentUser!.email
+                ? MyListTile(
+                    widget: CircleAvatar(
+                      maxRadius: 25,
+                      minRadius: 25,
+                      backgroundColor: Colors.primaries[index % 15],
+                      child: const Icon(
+                        Icons.person_2_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onTap: () => openChatPage(post.name!),
+                    title: post.name ?? "",
+                    subtitle: post.email,
+                    messageCount: 33,
+                    messageTime: 32,
+                  )
+                : const SizedBox.shrink();
           },
-            query: repositoryUser.queryUser(),
+          query: repositoryUser.queryUser(),
         ),
       ),
     );
