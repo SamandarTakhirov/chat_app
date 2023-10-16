@@ -1,21 +1,27 @@
 import 'dart:async';
 
+import 'package:chat_application_with_firebase/src/common/model/message_model.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-class DatabaseService {
-  const DatabaseService();
+class DBService {
+  const DBService();
 
   static final _database = FirebaseDatabase.instance;
 
-  Stream<DatabaseEvent> readAllData(String dataPath) => _database.ref(dataPath).onValue.asBroadcastStream();
+  Stream<DatabaseEvent> readAllData(String dataPath) =>
+      _database
+          .ref(dataPath)
+          .onValue
+          .asBroadcastStream();
 
   DatabaseReference queryFromPath(String dataPath) => _database.ref(dataPath);
 
-  Future<void> create(
-      String dataPath,
-      Map<String, Object?> json,
-      ) async {
-    final id = _database.ref(dataPath).push().key;
+  Future<void> create(String dataPath,
+      Map<String, Object?> json, {required MessageModel messageModel,}) async {
+    final id = _database
+        .ref(dataPath)
+        .push()
+        .key;
     json['id'] = id;
 
     await _database.ref(dataPath).child(id!).set(json);
@@ -28,5 +34,6 @@ class DatabaseService {
   }) =>
       _database.ref(dataPath).child(id).update(json);
 
-  Future<void> delete(String dataPath, String id) => _database.ref(dataPath).child(id).remove();
+  Future<void> delete(String dataPath, String id) =>
+      _database.ref(dataPath).child(id).remove();
 }

@@ -1,8 +1,9 @@
+import 'package:chat_application_with_firebase/src/common/model/user_model.dart';
 
-import '/src/common/service/database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
+import 'db_service.dart';
 
 sealed class AuthService {
   static final auth = FirebaseAuth.instance;
@@ -60,5 +61,23 @@ sealed class AuthService {
     }
   }
 
-  static User get user => auth.currentUser!;
+  static UserModel _userFromFireBaseUser(User? user) {
+    return user != null
+        ? UserModel(
+            id: user.uid,
+            name: user.displayName.toString(),
+            email: user.email.toString(),
+            password: user.phoneNumber.toString(),
+          )
+        : const UserModel(
+            id: "0",
+            name: "",
+            email: "",
+            password: "",
+          );
+  }
+
+  static Stream<UserModel> get user {
+    return auth.authStateChanges().map(_userFromFireBaseUser);
+  }
 }

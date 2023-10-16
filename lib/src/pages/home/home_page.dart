@@ -1,6 +1,7 @@
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 import '../../common/model/message_model.dart';
+import '../profile/profile_page.dart';
 import '/src/common/service/auth_service.dart';
 import '/src/data/user_repository.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,13 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 
+  void openProfilePage() => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProfilePage(),
+        ),
+      );
+
   @override
   void initState() {
     repositoryMessage = const MessageRepository();
@@ -38,6 +46,23 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFF246BFD),
+        onPressed: () {
+          setState(() {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ChatScreen(),
+              ),
+            );
+          });
+        },
+        child: const Icon(
+          Icons.edit,
+          color: Colors.white,
+        ),
+      ),
       appBar: AppBar(
         toolbarHeight: 60,
         backgroundColor: const Color(0xFF246BFD),
@@ -58,10 +83,12 @@ class _HomePageState extends State<HomePage> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: AccountPhoto(),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: AccountPhoto(
+              onTap: openProfilePage,
+            ),
           )
         ],
       ),
@@ -85,7 +112,7 @@ class _HomePageState extends State<HomePage> {
 
             return MyListTile(
               onTap: openChatPage,
-              title: AuthService.user.displayName!,
+              title: "${AuthService.auth.currentUser?.displayName}",
               subtitle: post.message,
               messageCount: post.message.length,
               messageTime: DateTime.now().minute - post.createAt.minute,

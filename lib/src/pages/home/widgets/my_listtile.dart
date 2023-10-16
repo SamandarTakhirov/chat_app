@@ -37,7 +37,7 @@ class MyListTile extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       trailing: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
@@ -49,11 +49,12 @@ class MyListTile extends StatelessWidget {
           ),
           CircleAvatar(
             backgroundColor: Colors.red,
-            minRadius: 15,
-            maxRadius: 15,
+            minRadius: 13,
+            maxRadius: 13,
             child: Text(
               "$messageCount",
               style: const TextStyle(
+                fontSize: 11,
                 color: Colors.white,
               ),
             ),

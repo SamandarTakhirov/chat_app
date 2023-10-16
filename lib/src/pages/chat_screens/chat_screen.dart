@@ -79,7 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
         centerTitle: true,
         title:  Text(
-          "${AuthService.user.displayName}",
+          "${AuthService.user}",
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w600,

@@ -16,7 +16,7 @@ class MessageModel {
   MessageModel copyWith({
     String? id,
     String? userId,
-    bool? edited,
+    String? edited,
     String? message,
   }) =>
       MessageModel(
