@@ -123,7 +123,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 3.0, horizontal: 10),
                     child: Align(
-                      alignment: post.userId == "2"
+                      alignment: post.userId == "1"
                           ? Alignment.bottomLeft
                           : Alignment.bottomRight,
                       child: GestureDetector(
