@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
 
             return MyListTile(
               onTap: openChatPage,
-              title: AuthService.user.displayName!,
+              title: AuthService.user!.displayName ?? " ",
               subtitle: post.message,
               messageCount: post.message.length,
               messageTime: DateTime.now().minute - post.createAt.minute,

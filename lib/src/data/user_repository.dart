@@ -50,7 +50,7 @@ class UserRepository implements IUserRepository {
   @override
   Future<void> updateUser(UserModel user) => _service.update(
     dataPath: ApiConsts.messagePath,
-    id: user.id,
+    id: user.uid,
     json: user.toJson(),
   );
 

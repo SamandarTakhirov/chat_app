@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '/src/common/constants/api_const.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import '../model/user_model.dart';
   const DatabaseService();
 
   static final _database = FirebaseDatabase.instance;
+
 
   Stream<DatabaseEvent> readAllData(String dataPath)=> _database.ref(dataPath).onValue.asBroadcastStream();
 
@@ -38,7 +41,7 @@ import '../model/user_model.dart';
   static Future<bool> storeUser(String email, String password, String username, String uid) async {
     try {
       final folder = _database.ref(ApiConsts.userPath).child(uid);
-      final member = UserModel(id: uid, name: username, email: email, password: password);
+      final member = UserModel(uid: uid, name: username, email: email, password: password);
       await folder.set(member.toJson());
       return true;
     } catch(e) {
@@ -57,5 +60,7 @@ import '../model/user_model.dart';
       return null;
     }
   }
+
+
 
  }

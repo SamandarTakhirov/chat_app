@@ -1,11 +1,20 @@
+import 'package:chat_application_with_firebase/src/common/model/user_model.dart';
 
 import '/src/common/service/database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-
 sealed class AuthService {
   static final auth = FirebaseAuth.instance;
+
+  UserModel _userModelFromFirebaseUser(User user) {
+    return UserModel(
+      uid: user.uid,
+      name: user.displayName!,
+      email: user.email!,
+      password: user.refreshToken!,
+    );
+  }
 
   static Future<bool> registration(
       String email, String password, String username) async {
@@ -26,14 +35,14 @@ sealed class AuthService {
     }
   }
 
-  static Future<bool> login(String email, String password) async {
-    try {
+  static Future login(String email, String password) async {
+    try   {
       final credential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
       return credential.user != null;
     } catch (e) {
       debugPrint("ERROR: $e");
-      return false;
+      return null;
     }
   }
 
@@ -60,5 +69,5 @@ sealed class AuthService {
     }
   }
 
-  static User get user => auth.currentUser!;
+  static User? get user => auth.currentUser;
 }

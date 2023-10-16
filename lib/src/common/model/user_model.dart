@@ -1,55 +1,55 @@
 
 
 class UserModel {
-  final String id;
+  final String uid;
   final String name;
   final String email;
   final String password;
 
   const UserModel({
-    required this.id,
+    required this.uid,
     required this.name,
     required this.email,
     required this.password,
   });
 
   UserModel copyWith(
-          {String? id, String? name, String? email, String? password}) =>
+          {String? uid, String? name, String? email, String? password}) =>
       UserModel(
-          id: this.id,
+          uid: this.uid,
           name: this.name,
           email: this.email,
           password: this.password);
 
 
   factory UserModel.fromJson(Map<String, Object?> json) => UserModel(
-        id: json["id"] as String,
+        uid: json["uid"] as String,
         name: json["name"] as String,
         email: json["email"] as String,
         password: json["password"] as String,
       );
 
   Map<String, Object?> toJson( ) => <String, Object?>{
-        "id": id,
+        "uid": uid,
         "name": name,
         "email": email,
         "password": password,
       };
 
   @override
-  int get hashCode => id.hashCode;
+  int get hashCode => uid.hashCode;
 
 
   @override
   String toString() {
-    return 'UserModel{id: $id, name: $name, email: $email, password: $password}';
+    return 'UserModel{u id: $uid, name: $name, email: $email, password: $password}';
   }
 
   @override
   bool operator ==(Object other) =>
       other is UserModel &&
       runtimeType == other.runtimeType &&
-      id == other.id &&
+      uid == other.uid &&
       name == other.name &&
       email == other.email &&
       password == other.password;
