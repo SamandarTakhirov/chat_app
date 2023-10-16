@@ -131,9 +131,9 @@ class _ChatScreenState extends State<ChatScreen> {
                         vertical: 3.0, horizontal: 10),
                     child: Align(
                       alignment:
-                      post.userId != AuthService.auth.currentUser!.uid
-                          ? Alignment.bottomLeft
-                          : Alignment.bottomRight,
+                          post.userId != AuthService.auth.currentUser!.uid
+                              ? Alignment.bottomLeft
+                              : Alignment.bottomRight,
                       child: GestureDetector(
                         onLongPress: () {
                           showModalBottomSheet(
@@ -141,55 +141,55 @@ class _ChatScreenState extends State<ChatScreen> {
                             builder: (context) {
                               return Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   post.userId ==
-                                      AuthService.auth.currentUser!.uid
+                                          AuthService.auth.currentUser!.uid
                                       ? IconButton(
-                                    onPressed: () => showModalBottomSheet(
-                                      context: context,
-                                      builder: (context) => Padding(
-                                        padding: EdgeInsets.only(
-                                          bottom: MediaQuery.of(context)
-                                              .viewInsets
-                                              .bottom,
-                                          top: 10,
-                                          right: 10,
-                                          left: 10,
-                                        ),
-                                        child: SizedBox(
-                                          width: size.width,
-                                          child: WriteText(
-                                            suffixIcon: Padding(
-                                              padding:
-                                              const EdgeInsets.all(
-                                                  3.0),
-                                              child: IconButton(
-                                                onPressed: () =>
-                                                    editPost(post),
-                                                style: FilledButton
-                                                    .styleFrom(
-                                                  backgroundColor:
-                                                  const Color(
-                                                      0xFF246BFD),
-                                                ),
-                                                icon: const Icon(
-                                                  Icons.done,
-                                                  color: Colors.white,
+                                          onPressed: () => showModalBottomSheet(
+                                            context: context,
+                                            builder: (context) => Padding(
+                                              padding: EdgeInsets.only(
+                                                bottom: MediaQuery.of(context)
+                                                    .viewInsets
+                                                    .bottom,
+                                                top: 10,
+                                                right: 10,
+                                                left: 10,
+                                              ),
+                                              child: SizedBox(
+                                                width: size.width,
+                                                child: WriteText(
+                                                  suffixIcon: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            3.0),
+                                                    child: IconButton(
+                                                      onPressed: () =>
+                                                          editPost(post),
+                                                      style: FilledButton
+                                                          .styleFrom(
+                                                        backgroundColor:
+                                                            const Color(
+                                                                0xFF246BFD),
+                                                      ),
+                                                      icon: const Icon(
+                                                        Icons.done,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  textEditingController:
+                                                      textEditingController,
                                                 ),
                                               ),
                                             ),
-                                            textEditingController:
-                                            textEditingController,
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                    icon: const Icon(
-                                      Icons.edit,
-                                      color: Color(0xFF246BFD),
-                                    ),
-                                  )
+                                          icon: const Icon(
+                                            Icons.edit,
+                                            color: Color(0xFF246BFD),
+                                          ),
+                                        )
                                       : const SizedBox.shrink(),
                                   IconButton(
                                     onPressed: () => deletePost(post.id),
@@ -208,25 +208,25 @@ class _ChatScreenState extends State<ChatScreen> {
                             borderRadius: BorderRadius.only(
                               topLeft: const Radius.circular(15),
                               bottomLeft: post.userId !=
-                                  AuthService.auth.currentUser!.uid
+                                      AuthService.auth.currentUser!.uid
                                   ? const Radius.circular(0)
                                   : const Radius.circular(15),
                               topRight: const Radius.circular(15),
                               bottomRight: post.userId !=
-                                  AuthService.auth.currentUser!.uid
+                                      AuthService.auth.currentUser!.uid
                                   ? const Radius.circular(15)
                                   : const Radius.circular(0),
                             ),
                             color:
-                            post.userId != AuthService.auth.currentUser!.uid
-                                ? const Color(0xFFF5F5F5)
-                                : const Color(0xFF246BFD),
+                                post.userId != AuthService.auth.currentUser!.uid
+                                    ? const Color(0xFFF5F5F5)
+                                    : const Color(0xFF246BFD),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8),
                             child: Column(
                               crossAxisAlignment: post.userId !=
-                                  AuthService.auth.currentUser!.uid
+                                      AuthService.auth.currentUser!.uid
                                   ? CrossAxisAlignment.start
                                   : CrossAxisAlignment.end,
                               mainAxisSize: MainAxisSize.min,
@@ -235,7 +235,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   post.message,
                                   style: TextStyle(
                                     color: post.userId !=
-                                        AuthService.auth.currentUser!.uid
+                                            AuthService.auth.currentUser!.uid
                                         ? Colors.black
                                         : Colors.white,
                                     fontSize: 17,
@@ -250,8 +250,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                       textAlign: TextAlign.end,
                                       style: TextStyle(
                                         color: post.userId !=
-                                            AuthService
-                                                .auth.currentUser!.uid
+                                                AuthService
+                                                    .auth.currentUser!.uid
                                             ? Colors.black
                                             : Colors.white,
                                         fontSize: 10,
@@ -262,8 +262,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                       textAlign: TextAlign.end,
                                       style: TextStyle(
                                         color: post.userId !=
-                                            AuthService
-                                                .auth.currentUser!.uid
+                                                AuthService
+                                                    .auth.currentUser!.uid
                                             ? Colors.black
                                             : Colors.white,
                                         fontSize: 10,
