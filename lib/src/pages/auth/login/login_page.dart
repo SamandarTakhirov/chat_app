@@ -1,4 +1,3 @@
-import 'package:chat_application_with_firebase/src/common/model/user_model.dart';
 import 'package:chat_application_with_firebase/src/pages/auth/registration/registration_page.dart';
 import 'package:flutter/material.dart';
 
@@ -25,11 +24,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void onPressed() async {
-    UserModel? success = await AuthService.login(
+    bool success = await AuthService.login(
       emailController.text,
       passwordController.text,
     );
-    if (success!=null) {
+    if (success) {
       Navigator.push(
         context,
         MaterialPageRoute(

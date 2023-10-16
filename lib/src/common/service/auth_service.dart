@@ -1,87 +1,65 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
-import '../model/user_model.dart';
+import 'db_service.dart';
 
-abstract class AuthService {
-  static final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  //create user from FirebaseUser
-  static UserModel? _userFromFirebaseUser(User? user) {
-    return user != null
-        ? UserModel(
-            uid: user.uid,
-            name: user.displayName,
-            email: user.email!,
-            password: user.refreshToken!,
-          )
-        : null;
-  }
+sealed class AuthService {
+  static final auth = FirebaseAuth.instance;
 
-  //auth change user stream
-  static Stream<UserModel?> get user {
-    return _auth.authStateChanges().map(_userFromFirebaseUser);
-  }
-
-  //sing in with email and password
-  static Future<UserModel?> login(
-    String password,
-    String email,
-  ) async {
+  static Future<bool> registration(
+      String email, String password, String username) async {
     try {
-      final result = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      User? user = result.user;
-      return _userFromFirebaseUser(user);
-    } catch (e) {
-      debugPrint(e.toString());
-      return null;
-    }
-  }
-
-  static User? get currentUser => _auth.currentUser;
-
-  //register with email
-  static Future<UserModel?> registration(
-    String password,
-    String email,
-    String username,
-  ) async {
-    try {
-      UserCredential result = await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      await result.user!.updateDisplayName(username);
-      result = await _auth.signInWithEmailAndPassword(
+      final credential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      if (result.user == null) return null;
-      User user = result.user!;
-      return _userFromFirebaseUser(user);
+      if (credential.user != null) {
+        await credential.user!.updateDisplayName(username);
+
+        await DatabaseService.storeUser(
+            email, password, username, credential.user!.uid);
+      }
+
+      return credential.user != null;
     } catch (e) {
-      debugPrint(e.toString());
-      return null;
+      debugPrint("ERROR: $e");
+      return false;
     }
   }
 
-  //sign out
-  static Future<void> signOut() async {
+  static Future<bool> login(String email, String password) async {
     try {
-      return await _auth.signOut();
+      final credential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      return credential.user != null;
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint("ERROR: $e");
+      return false;
     }
   }
 
-  static void logOut() {
-    AuthService.logOut();
+  static Future<bool> logOut() async {
+    try {
+      await auth.signOut();
+      return true;
+    } catch (e) {
+      debugPrint("ERROR: $e");
+      return false;
+    }
   }
 
-  static void deleteAccount() {
-    AuthService.deleteAccount();
+  static Future<bool> deleteAccount() async {
+    try {
+      if (auth.currentUser != null) {
+        await auth.currentUser!.delete();
+        return true;
+      }
+      return false;
+    } catch (e) {
+      debugPrint("ERROR: $e");
+      return false;
+    }
   }
 
-// static Stream getAllUsers() {}
+  static User get user => auth.currentUser!;
 }

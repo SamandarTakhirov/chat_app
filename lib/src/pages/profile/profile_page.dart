@@ -76,14 +76,11 @@ class ProfilePage extends StatelessWidget {
                   backgroundColor: const Color(0xFF246BFD),
                 ),
                 onPressed: () {
-
+                  AuthService.logOut();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) {
-                          AuthService.logOut();
-                          return const LoginPage();
-                        },
+                        builder: (context) => const LoginPage(),
                       ));
                 },
                 child: const Row(
@@ -107,13 +104,11 @@ class ProfilePage extends StatelessWidget {
                   backgroundColor: const Color(0xFF246BFD),
                 ),
                 onPressed: () {
+                  AuthService.deleteAccount();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) {
-                          AuthService.deleteAccount();
-                          return const RegistrationPage();
-                        },
+                        builder: (context) => const RegistrationPage(),
                       ));
                 },
                 child: const Row(
