@@ -289,32 +289,41 @@ class _ChatScreenState extends State<ChatScreen> {
                 horizontal: 10.0,
                 vertical: 5,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.file_upload_outlined,
-                      size: 30,
-                      color: Color(0xFF246BFD),
+              child: SizedBox(
+                width: size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 30,
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.file_upload_outlined,
+                          size: 30,
+                          color: Color(0xFF246BFD),
+                        ),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: size.width * 0.70,
-                    child: WriteText(
-                      textEditingController: textEditingController,
+                    SizedBox(
+                      width: size.width - 80,
+                      child: WriteText(
+                        textEditingController: textEditingController,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: sendMessage,
-                    icon: const Icon(
-                      Icons.send,
-                      size: 30,
-                      color: Color(0xFF246BFD),
+                    SizedBox(
+                      width: 30,
+                      child: IconButton(
+                        onPressed: sendMessage,
+                        icon: const Icon(
+                          Icons.send,
+                          size: 30,
+                          color: Color(0xFF246BFD),
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
