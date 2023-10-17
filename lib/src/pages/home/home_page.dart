@@ -101,6 +101,7 @@ class _HomePageState extends State<HomePage> {
 
               child: Center(
                 child: Text(
+
                   "Search for messages or users",
                   style: TextStyle(
                     color: Color(0xFF3C3C43),
