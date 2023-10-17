@@ -79,14 +79,14 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             style: IconButton.styleFrom(),
             onPressed: () {},
-            icon: const Image(
+            icon: Image(
               image: AssetImage("assets/images/ic_edit.png"),
               width: 22,
               height: 22,
             ),
           ),
         ],
-        bottom: const PreferredSize(
+        bottom: PreferredSize(
           preferredSize: Size(355, 36),
           child: SizedBox(
             width: 355,
@@ -98,7 +98,6 @@ class _HomePageState extends State<HomePage> {
                   Radius.circular(10),
                 ),
               ),
-
               child: Center(
                 child: Text(
 
