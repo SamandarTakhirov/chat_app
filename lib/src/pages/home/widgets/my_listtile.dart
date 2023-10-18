@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class MyListTile extends StatelessWidget {
   final String title;
   final String subtitle;
-  final int messageTime;
-  final int messageCount;
+  final int? messageTime;
+  final int? messageCount;
   final Widget widget;
   final void Function() onTap;
 
@@ -12,8 +12,8 @@ class MyListTile extends StatelessWidget {
     required this.widget,
     required this.onTap,
     required this.title,
-    required this.messageCount,
-    required this.messageTime,
+    this.messageCount,
+    this.messageTime,
     required this.subtitle,
     super.key,
   });
@@ -40,25 +40,29 @@ class MyListTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(
-            messageTime == 0 ? "Just now" : "$messageTime min ago",
-            style: const TextStyle(
-              fontSize: 12,
-              color: Color(0xFF797C7B),
-            ),
-          ),
-          CircleAvatar(
-            backgroundColor: Colors.red,
-            minRadius: 13,
-            maxRadius: 13,
-            child: Text(
-              "$messageCount",
-              style: const TextStyle(
-                fontSize: 11,
-                color: Colors.white,
-              ),
-            ),
-          ),
+          messageTime != null
+              ? Text(
+                  messageTime == 0 ? "Just now" : "$messageTime:00",
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF797C7B),
+                  ),
+                )
+              : const SizedBox.shrink(),
+          messageCount != null
+              ? CircleAvatar(
+                  backgroundColor: Colors.red,
+                  minRadius: 13,
+                  maxRadius: 13,
+                  child: Text(
+                    "$messageCount",
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
         ],
       ),
     );

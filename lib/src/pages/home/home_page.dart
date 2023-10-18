@@ -46,14 +46,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFF246BFD),
-        onPressed: () {},
-        child: const Icon(
-          Icons.edit,
-          color: Colors.white,
-        ),
-      ),
       appBar: AppBar(
         toolbarHeight: 60,
         backgroundColor: Colors.white,
@@ -79,14 +71,14 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             style: IconButton.styleFrom(),
             onPressed: () {},
-            icon: Image(
+            icon: const Image(
               image: AssetImage("assets/images/ic_edit.png"),
               width: 22,
               height: 22,
             ),
           ),
         ],
-        bottom: PreferredSize(
+        bottom: const PreferredSize(
           preferredSize: Size(355, 36),
           child: SizedBox(
             width: 355,
@@ -99,12 +91,26 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               child: Center(
-                child: Text(
-
-                  "Search for messages or users",
-                  style: TextStyle(
-                    color: Color(0xFF3C3C43),
-                  ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Image(
+                        width: 15,
+                        height: 15,
+                        image: AssetImage("assets/images/ic_search.png"),
+                      ),
+                    ),
+                    Text(
+                      "Search for messages or users",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: Color(0xFF3C3C43),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -120,25 +126,39 @@ class _HomePageState extends State<HomePage> {
 
             final id = [post.uid, AuthService.auth.currentUser!.uid]..sort();
             return post.email != AuthService.auth.currentUser!.email
-                ? MyListTile(
-                    widget: CircleAvatar(
-                      maxRadius: 25,
-                      minRadius: 25,
-                      backgroundColor: Colors.primaries[index % 15],
-                      child: const Icon(
-                        Icons.person_2_rounded,
-                        color: Colors.white,
+                ? Column(
+                  children: [
+                    MyListTile(
+                        widget: CircleAvatar(
+                          maxRadius: 25,
+                          minRadius: 25,
+                          backgroundColor: Colors.primaries[index % 15],
+                          child: const Icon(
+                            CupertinoIcons.profile_circled,
+                            color: Colors.white,
+                          ),
+                        ),
+                        onTap: () => openChatPage(
+                          post.name!,
+                          id.join(),
+                        ),
+                        title: post.name ?? "",
+                        subtitle: post.email,
+                        messageCount: 33,
+                        messageTime: DateTime.now().minute,
                       ),
-                    ),
-                    onTap: () => openChatPage(
-                      post.name!,
-                      id.join(),
-                    ),
-                    title: post.name ?? "",
-                    subtitle: post.email,
-                    messageCount: 33,
-                    messageTime: 32,
-                  )
+                    const Padding(
+                      padding: EdgeInsets.only(left: 80.0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 1,
+                        child: ColoredBox(
+                          color: Color(0xFFD8D8D8),
+                        ),
+                      ),
+                    )
+                  ],
+                )
                 : const SizedBox.shrink();
           },
           query: repositoryUser.queryUser(),
