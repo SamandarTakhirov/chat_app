@@ -1,4 +1,5 @@
 import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
+import 'package:flutter/cupertino.dart';
 
 import '/src/common/model/message_model.dart';
 import '/src/data/message_repository.dart';
@@ -25,6 +26,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   late IMessageRepository repository;
   late TextEditingController textEditingController;
+  bool isTexting = false;
 
   @override
   void initState() {
@@ -41,7 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
     if (textEditingController.text.isNotEmpty) {
       repository.createMessage(message);
     }
-    textEditingController.clear();
+    textEditingController.text = "";
   }
 
   void editPost(MessageModel message) async {
@@ -77,20 +79,51 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF246BFD),
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: BackButton(
-            color: Colors.white,
+        backgroundColor: const Color(0xFFFFFFFF),
+        leadingWidth: 90,
+        leading: GestureDetector(
+          onTap: () => setState(() {
+            Navigator.pop(context);
+          }),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Row(
+              children: [
+                Icon(
+                  CupertinoIcons.back,
+                  color: Color(0xFF037EE5),
+                ),
+                Text(
+                  "Chats",
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFF037EE5),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         centerTitle: true,
-        title: Text(
-          widget.name,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
-          ),
+        title: Column(
+          children: [
+            Text(
+              widget.name,
+              style: const TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const Text(
+              "last seen just now",
+              style: TextStyle(
+                fontSize: 13,
+                color: Color(0xFF787878),
+              ),
+            ),
+          ],
         ),
         actions: const [
           Padding(
@@ -101,8 +134,13 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Stack(
         children: [
+          const Image(
+            image: AssetImage("assets/images/bkg.jpg"),
+            fit: BoxFit.cover,
+            width: double.infinity,
+          ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 85),
+            padding: const EdgeInsets.only(bottom: 60),
             child: FirebaseAnimatedList(
               reverse: true,
               sort: (a, b) {
@@ -160,6 +198,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                               child: SizedBox(
                                                 width: size.width,
                                                 child: WriteText(
+                                                  onChanged: (text) {},
                                                   suffixIcon: Padding(
                                                     padding:
                                                         const EdgeInsets.all(
@@ -217,10 +256,17 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ? const Radius.circular(15)
                                   : const Radius.circular(0),
                             ),
+                            border: Border.all(
+                              color: post.userId !=
+                                      AuthService.auth.currentUser!.uid
+                                  ? Colors.black
+                                  : const Color(0xFF21C004),
+                              width: 0.2,
+                            ),
                             color:
                                 post.userId != AuthService.auth.currentUser!.uid
                                     ? const Color(0xFFF5F5F5)
-                                    : const Color(0xFF246BFD),
+                                    : const Color(0xFFE1FEC6),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8),
@@ -237,7 +283,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                     color: post.userId !=
                                             AuthService.auth.currentUser!.uid
                                         ? Colors.black
-                                        : Colors.white,
+                                        : Colors.black,
                                     fontSize: 17,
                                   ),
                                 ),
@@ -253,7 +299,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 AuthService
                                                     .auth.currentUser!.uid
                                             ? Colors.black
-                                            : Colors.white,
+                                            : const Color(0xFF2DA430),
                                         fontSize: 10,
                                       ),
                                     ),
@@ -265,7 +311,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 AuthService
                                                     .auth.currentUser!.uid
                                             ? Colors.black
-                                            : Colors.white,
+                                            : const Color(0xFF2DA430),
                                         fontSize: 10,
                                       ),
                                     ),
@@ -283,43 +329,51 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           Positioned(
-            bottom: 5,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 5,
-              ),
-              child: SizedBox(
-                width: size.width,
+            bottom: 0,
+            child: SizedBox(
+              width: size.width,
+              height: 60,
+              child: ColoredBox(
+                color: Colors.white,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(
-                      width: 30,
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.file_upload_outlined,
-                          size: 30,
-                          color: Color(0xFF246BFD),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Image(
+                        image: AssetImage("assets/images/ic_send.png"),
+                        width: 30,
+                        height: 30,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: SizedBox(
+                        width: size.width * 0.75,
+                        child: WriteText(
+                          onChanged: (text) {
+                            setState(() {
+                              textEditingController.text.isNotEmpty
+                                  ? isTexting = true
+                                  : isTexting = false;
+                            });
+                          },
+                          textEditingController: textEditingController,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: size.width - 80,
-                      child: WriteText(
-                        textEditingController: textEditingController,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 30,
-                      child: IconButton(
-                        onPressed: sendMessage,
-                        icon: const Icon(
-                          Icons.send,
-                          size: 30,
-                          color: Color(0xFF246BFD),
+                    IconButton(
+                      onPressed: sendMessage,
+                      icon: Image(
+                        width: 30,
+                        height: 30,
+                        image: const AssetImage(
+                          "assets/images/ic_send_message.png",
                         ),
+                        color: !isTexting
+                            ? const Color(0xFFB9B9BA)
+                            : const Color(0xFF007AFF),
                       ),
                     ),
                   ],
