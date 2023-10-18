@@ -1,5 +1,6 @@
 import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
 import 'package:chat_application_with_firebase/src/data/user_repository.dart';
+import 'package:chat_application_with_firebase/src/pages/auth/login/login_page.dart';
 import 'package:chat_application_with_firebase/src/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -112,7 +113,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               onPressed: () {
                 setState(() {
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ));
                 });
               },
               child: const Text(

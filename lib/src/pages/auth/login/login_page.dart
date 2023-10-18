@@ -23,23 +23,21 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
-  void onPressed() async {
+  void onPressed(BuildContext context) async {
     bool success = await AuthService.login(
       emailController.text,
       passwordController.text,
     );
     if (success) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ),
-      );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+          (route) => false);
     }
   }
 
   void openRegistrationPage() => setState(() {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const RegistrationPage(),
@@ -93,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              onPressed: onPressed,
+              onPressed: () => onPressed(context),
               child: const Text(
                 "Sign In",
                 style: TextStyle(
