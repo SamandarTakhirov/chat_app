@@ -7,7 +7,6 @@ import '../profile/profile_page.dart';
 import '/src/common/service/auth_service.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/message_repository.dart';
 import '../chat_screens/chat_screen.dart';
 import 'widgets/my_listtile.dart';
 
@@ -19,7 +18,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late IMessageRepository repositoryMessage;
   late IUserRepository repositoryUser;
 
   void openChatPage(String name, String id) => Navigator.push(

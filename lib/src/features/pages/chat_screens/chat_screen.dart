@@ -1,3 +1,4 @@
+
 import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -7,6 +8,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 
 import '../home/widgets/account_photo.dart';
+import 'widgets/chat_mixin.dart';
 import 'widgets/write_text.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -23,7 +25,8 @@ class ChatScreen extends StatefulWidget {
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatScreenState extends State<ChatScreen> with ChatMixin{
+  @override
   late IMessageRepository repository;
   late TextEditingController textEditingController;
   bool isTexting = false;
@@ -85,7 +88,7 @@ class _ChatScreenState extends State<ChatScreen> {
           onTap: () => setState(() {
             Navigator.pop(context);
           }),
-          child: const Padding(
+          child:  Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
               children: [
@@ -116,7 +119,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const Text(
+             Text(
               "last seen just now",
               style: TextStyle(
                 fontSize: 13,
@@ -125,7 +128,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ],
         ),
-        actions: const [
+        actions:  [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: AccountPhoto(),
@@ -134,7 +137,7 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Stack(
         children: [
-          const Image(
+           Image(
             image: AssetImage("assets/images/bkg.jpg"),
             fit: BoxFit.cover,
             width: double.infinity,
@@ -165,7 +168,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     minWidth: size.width * 0.5,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
+                    padding:  EdgeInsets.symmetric(
                         vertical: 3.0, horizontal: 10),
                     child: Align(
                       alignment:
@@ -340,7 +343,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                        getMedia(MediaSource.gallery),
                       icon: const Image(
                         image: AssetImage("assets/images/ic_send.png"),
                         width: 30,
@@ -386,3 +390,5 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
+
+
