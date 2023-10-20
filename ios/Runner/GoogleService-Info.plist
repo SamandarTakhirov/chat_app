@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>dev.takhirov.chatApplicationWithFirebase</string>
+	<string>dev.takhirov.chatApp1</string>
 	<key>PROJECT_ID</key>
 	<string>chat-app-cdc16</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,7 +25,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:671880926521:ios:e96985f244b388acc384e8</string>
+	<string>1:671880926521:ios:859207b2d0129c0cc384e8</string>
 	<key>DATABASE_URL</key>
 	<string>https://chat-app-cdc16-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>

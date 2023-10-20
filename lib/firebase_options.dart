@@ -56,7 +56,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyB9ukUvOTm9DsgDhktIWVh1KulYcaGmZqU',
-    appId: '1:671880926521:android:e7e10e3be18a7f37c384e8',
+    appId: '1:671880926521:android:021b0ceed1f3e543c384e8',
     messagingSenderId: '671880926521',
     projectId: 'chat-app-cdc16',
     databaseURL: 'https://chat-app-cdc16-default-rtdb.europe-west1.firebasedatabase.app',
@@ -65,17 +65,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyARuJb1qiAUE5YJ6X3be9w8700lDiiulk4',
-    appId: '1:671880926521:ios:e96985f244b388acc384e8',
+    appId: '1:671880926521:ios:859207b2d0129c0cc384e8',
     messagingSenderId: '671880926521',
     projectId: 'chat-app-cdc16',
     databaseURL: 'https://chat-app-cdc16-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'chat-app-cdc16.appspot.com',
-    iosBundleId: 'dev.takhirov.chatApplicationWithFirebase',
+    iosBundleId: 'dev.takhirov.chatApp1',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyARuJb1qiAUE5YJ6X3be9w8700lDiiulk4',
-    appId: '1:671880926521:ios:1d349172b4e5cc75c384e8',
+    appId: '1:671880926521:ios:20b39eca9ea1dfa7c384e8',
     messagingSenderId: '671880926521',
     projectId: 'chat-app-cdc16',
     databaseURL: 'https://chat-app-cdc16-default-rtdb.europe-west1.firebasedatabase.app',

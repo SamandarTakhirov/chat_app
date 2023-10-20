@@ -1,5 +1,8 @@
 {
   "database": {
     "rules": "y"
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

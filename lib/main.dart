@@ -11,10 +11,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  NotificationService()
-    ..requestPermisson()
-    ..generateToken()
-    ..notificationSettings();
+  NotificationService().initialize();
 
 
   runApp(const App());

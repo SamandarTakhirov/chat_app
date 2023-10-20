@@ -4,9 +4,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 Future<void> _onBackgroundNotification(RemoteMessage message) async {
-  print(
-    'Handing a background message : ${message.messageId} / ${message.notification?.body} / ${message.notification?.title} / ${message.notification?.titleLocKey}',
-  );
+  // print(
+  //   'Handing a background message : ${message.messageId} / ${message.notification?.body} / ${message.notification?.title} / ${message.notification?.titleLocKey}',
+  // );
 }
 
 class NotificationService {
@@ -36,14 +36,12 @@ class NotificationService {
   Future<void> generateToken() async {
     await _messaging.getToken().then(
       (value) => fcmToken = value,
-
       onError: (Object? e, StackTrace stack) async {
         await generateToken();
       },
     );
 
-    print(
-        '------------------------------------------------------------------------');
+    print('------------------------------------------------------------------------');
     print(fcmToken);
     print(
         '------------------------------------------------------------------------');
