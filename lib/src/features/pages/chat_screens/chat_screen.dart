@@ -1,4 +1,5 @@
 import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
+import 'package:chat_application_with_firebase/src/features/data/notification_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../data/message_repository.dart';
@@ -25,12 +26,14 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   late IMessageRepository repository;
+  late INotificationRepository notificationRepository;
   late TextEditingController textEditingController;
   bool isTexting = false;
 
   @override
   void initState() {
     repository = MessageRepository(widget.id);
+    notificationRepository = NotificationRepository(widget.id);
     textEditingController = TextEditingController();
     super.initState();
   }
@@ -42,6 +45,11 @@ class _ChatScreenState extends State<ChatScreen> {
     );
     if (textEditingController.text.isNotEmpty) {
       repository.createMessage(message);
+      notificationRepository.sendNotification(
+        message.id,
+        "c71DJET4RheDI4Bi0TfYts:APA91bH1G_r4S4qjH9GSuLpmR4E5CWnsL1L1eRE-gya7C1FdaDpoYFshLTzjupbQquaqAjZtK6qfGsSE0BeAEM4_MvzFe2nBda4poa7PenJwEDQ_BBZVVIQCpDkfjFcKp1KiQwfSmhsb",
+        textEditingController.text.trim(),
+      );
     }
     textEditingController.text = "";
   }

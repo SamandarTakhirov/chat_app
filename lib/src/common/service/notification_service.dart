@@ -1,12 +1,18 @@
+import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
+import 'dart:developer' as devtools show log;
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+extension Log on Object {
+  void log() => devtools.log(toString());
+}
+
 Future<void> _onBackgroundNotification(RemoteMessage message) async {
-  // print(
-  //   'Handing a background message : ${message.messageId} / ${message.notification?.body} / ${message.notification?.title} / ${message.notification?.titleLocKey}',
-  // );
+  'Handing a background message : ${message.messageId} / ${message.notification?.body} / ${message.notification?.title} / ${message.notification?.titleLocKey}'
+      .log();
 }
 
 class NotificationService {
@@ -41,7 +47,8 @@ class NotificationService {
       },
     );
 
-    print('------------------------------------------------------------------------');
+    print(
+        '------------------------------------------------------------------------');
     print(fcmToken);
     print(
         '------------------------------------------------------------------------');
@@ -98,6 +105,56 @@ class NotificationService {
     });
 
     FirebaseMessaging.onBackgroundMessage(_onBackgroundNotification);
+  }
+
+  Future<void> sendNotification({
+    required String token,
+    required String title,
+    required String body,
+  }) async {
+    final client = HttpClient();
+
+    try {
+      final request = await client
+          .postUrl(Uri.parse('https://fcm.googleapis.com/fcm/send'));
+
+      request.headers.add('Content-Type', 'application/json; charset=UTF-8');
+      request.headers.add(
+        'Authorization',
+        'Bearer AAAAnG85VTk:APA91bEQRnS3jt-lXdS0RZ6YTAzlZ9wyCej-1H0sMkiIeptiiwncd8MdXlkcrBNaFjuaiS20zkTZ73_lfeXmOk1dMHcM8StjzhVqqj124o3rNfRXqB7v2N1uq_FIs3zQzudWJQ6eRKsJ', // you need to add Firebase Cloud-Messaging server key
+      );
+
+      request.write(jsonEncode(
+        <String, dynamic>{
+          "priority": "high",
+          "data": <String, dynamic>{
+            "click_action": "FLUTTER_NOTIFICATION_CLICK",
+            "status": "done",
+            "body": body,
+            "title": title,
+            "product_id": "Test 88888",
+          },
+          "notification": <String, dynamic>{
+            "body": body,
+            "title": title,
+            "android_channel_id": "firebase_g7_notification_channel_id",
+            // "image": "",
+          },
+          "to": token,
+        },
+      ));
+
+      final response = await request.close();
+      final stringData = await response.transform(utf8.decoder).join();
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        stringData.log();
+      }
+    } catch (e) {
+      'FCM Error (Send Notification) : $e'.log();
+    } finally {
+      client.close();
+    }
   }
 }
 

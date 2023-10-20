@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:firebase_database/firebase_database.dart';
 
 import '../../common/constants/api_const.dart';
@@ -17,7 +16,6 @@ abstract interface class IMessageRepository {
 
   Future<void> createMessage(MessageModel message);
 
-
   Future<void> deleteMessage(String id);
 
   Future<void> updateMessage(MessageModel message);
@@ -25,7 +23,6 @@ abstract interface class IMessageRepository {
 
 class MessageRepository extends IMessageRepository {
   const MessageRepository(super.chatPath) : _service = const DatabaseService();
-
   final DatabaseService _service;
 
   @override
@@ -44,8 +41,6 @@ class MessageRepository extends IMessageRepository {
   @override
   Future<void> createMessage(MessageModel message) =>
       _service.create(ApiConsts.messagePath(chatPath), message.toJson());
-
-
 
   @override
   DatabaseReference queryMessage() =>
