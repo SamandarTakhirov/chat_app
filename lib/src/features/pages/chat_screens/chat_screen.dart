@@ -12,9 +12,6 @@ import '../home/widgets/account_photo.dart';
 import 'widgets/chat_mixin.dart';
 import 'widgets/write_text.dart';
 
-//  "dKbsgpiiZk11lhpX2JIKCF:APA91bFhjkr2zmF8kCEIucnCEVP2hebG6vkCy"
-//             "8aH_cGlCKG7ebeLv3nJRYvUa7R9upEjfbkP8o8I3tv2mJ8RuIzOBtkj"
-//             "-V5NcIy7-O93Aszkx1r62rIzHhJZSl_Sdl-j6b3UCMX0FjhP",
 
 class ChatScreen extends StatefulWidget {
   final String name;
@@ -398,8 +395,11 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
                                 ? userModel.deviceToken!
                                 : "  ",
                           );
+                          textEditingController.text = "";
+                          setState(() {
+                            isTexting = false;
+                          });
                         }
-                        textEditingController.text = "";
                       },
                       icon: Image(
                         width: 30,
