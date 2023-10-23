@@ -38,7 +38,7 @@ class DatabaseService {
       _database.ref(dataPath).child(id).remove();
 
   static Future<bool> storeUser(
-      String email, String password, String username, String uid) async {
+      String email, String password, String username, String uid, String deviceToken) async {
     try {
       final folder = _database.ref(ApiConsts.userPath).child(uid);
       final member = UserModel(
@@ -46,7 +46,7 @@ class DatabaseService {
           name: username,
           email: email,
           password: password,
-          deviceToken: "${NotificationService()..generateToken()}");
+          deviceToken: $deviceToken);
       await folder.set(member.toJson());
       return true;
     } catch (e) {

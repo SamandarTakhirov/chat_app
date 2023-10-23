@@ -2,7 +2,6 @@ import 'package:chat_application_with_firebase/src/common/service/auth_service.d
 import 'package:chat_application_with_firebase/src/features/data/notification_repository.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../common/model/user_model.dart';
 import '../../data/message_repository.dart';
 import '/src/common/model/message_model.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -92,7 +91,6 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    late UserModel userModel;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -173,9 +171,9 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
               },
               query: repository.queryMessage(),
               itemBuilder: (context, snapshot, animation, index) {
-                userModel = UserModel.fromJson(
-                  Map<String, Object?>.from(snapshot.value as Map),
-                );
+                // userModel = UserModel.fromJson(
+                //   Map<String, Object?>.from(snapshot.value as Map),
+                // );
                 final post = MessageModel.fromJson(
                   Map<String, Object?>.from(snapshot.value as Map),
                 );
@@ -392,12 +390,17 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
                         if (textEditingController.text.isNotEmpty) {
                           repository.createMessage(message);
                           notificationRepository.sendNotification(
-                            body: textEditingController.text.trim(),
-                            title: AuthService.auth.currentUser!.displayName!,
-                            token: userModel.deviceToken != null
-                                ? userModel.deviceToken!
-                                : "  ",
-                          );
+                              body: textEditingController.text.trim(),
+                              title: AuthService.auth.currentUser!.displayName!,
+                              token: " "
+                              // token:"fg9JSmZ7RoWk79m6Sj3wWr:APA91bHTbFlzwfgmyrIXoCbefH4sqfGG5Zj5Pp7EE5DcTXMLKJkO-cFQEgGXm_Xka6p7GCUxMUlsy1RrD-1uKNk1PJeuAJP7cA-t_usXg_E4vMP0re_xa1pHlQAAII11KIlSz-iafBbD",
+                              // token: "${NotificationService()
+                              //   ..requestPermisson()
+                              //   ..generateToken()}"
+                              // token: userModel.deviceToken != null
+                              //     ? userModel.deviceToken!
+                              //     : "  ",
+                              );
                         }
                         textEditingController.text = "";
                       },

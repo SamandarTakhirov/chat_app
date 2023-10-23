@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                           id.join(),
                         ),
                         title: post.name ?? "",
-                        subtitle: post.email,
+                        subtitle: post.email!,
                         messageCount: null,
                         messageTime: null,
                       ),
