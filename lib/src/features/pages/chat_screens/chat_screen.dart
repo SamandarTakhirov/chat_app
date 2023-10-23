@@ -1,5 +1,4 @@
 import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
-import 'package:chat_application_with_firebase/src/common/service/ios_notification_service.dart';
 import 'package:chat_application_with_firebase/src/features/data/notification_repository.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -100,7 +99,7 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFFFFF),
-        leadingWidth: 90,
+        leadingWidth: 100,
         leading: GestureDetector(
           onTap: () => setState(() {
             Navigator.pop(context);
@@ -116,7 +115,7 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
                 Text(
                   "Chats",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 17,
                     fontWeight: FontWeight.w500,
                     color: Color(0xFF037EE5),
                   ),

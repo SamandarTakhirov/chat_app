@@ -56,7 +56,7 @@ mixin ChatMixin on State<ChatScreen> {
     Navigator.pop(context);
   }
 
-  Future<void> getMedia(MediaSource mediaSource) async {
+  void getMedia(MediaSource mediaSource) async {
     final pickedImage = await ImagePicker().pickImage(
       source: mediaSource.name == "camera"
           ? ImageSource.camera

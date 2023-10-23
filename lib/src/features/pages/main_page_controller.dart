@@ -71,7 +71,7 @@ class _MainPageControllerState extends State<MainPageController> {
               size: 28,
               color: Color(0xA6545458),
             ),
-            label: "Contacts",
+            label: "All account",
             activeIcon: Icon(
               CupertinoIcons.profile_circled,
               size: 28,
