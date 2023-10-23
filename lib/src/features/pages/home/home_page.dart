@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   void openChatPage(String name, String id, String token) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ChatScreen(name: name, id: id,token: token),
+          builder: (context) => ChatScreen(name: name, id: id, token: token),
         ),
       );
 
@@ -69,17 +69,19 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             style: IconButton.styleFrom(),
             onPressed: () {
-              ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(
-                const SnackBar(
-                  closeIconColor: Colors.white,
-                  showCloseIcon: true,
-                  backgroundColor: Color(0xFF037EE5),
-                  behavior: SnackBarBehavior.floating,
-                  dismissDirection: DismissDirection.startToEnd,
-                  content: Text("Will update soon..."),
-                  duration: Duration(seconds: 4),
-                ),
-              );
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(
+                    closeIconColor: Colors.white,
+                    showCloseIcon: true,
+                    backgroundColor: Color(0xFF037EE5),
+                    behavior: SnackBarBehavior.floating,
+                    dismissDirection: DismissDirection.startToEnd,
+                    content: Text("Will update soon..."),
+                    duration: Duration(seconds: 4),
+                  ),
+                );
             },
             icon: const Image(
               image: AssetImage("assets/images/ic_edit.png"),
@@ -88,21 +90,23 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
-        bottom:  PreferredSize(
+        bottom: PreferredSize(
           preferredSize: const Size(355, 36),
           child: GestureDetector(
             onTap: () {
-              ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(
-                const SnackBar(
-                  closeIconColor: Colors.white,
-                  showCloseIcon: true,
-                  backgroundColor: Color(0xFF037EE5),
-                  behavior: SnackBarBehavior.floating,
-                  dismissDirection: DismissDirection.startToEnd,
-                  content: Text("Will update soon..."),
-                  duration: Duration(seconds: 4),
-                ),
-              );
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(
+                    closeIconColor: Colors.white,
+                    showCloseIcon: true,
+                    backgroundColor: Color(0xFF037EE5),
+                    behavior: SnackBarBehavior.floating,
+                    dismissDirection: DismissDirection.startToEnd,
+                    content: Text("Will update soon..."),
+                    duration: Duration(seconds: 4),
+                  ),
+                );
             },
             child: const SizedBox(
               width: 355,
@@ -163,11 +167,15 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white,
                           ),
                         ),
-                        onTap: () => openChatPage(
-                          post.name!,
-                          id.join(),
-                          post.deviceToken!,
-                        ),
+                        onTap: () {
+                          openChatPage(
+                            post.name!,
+                            id.join(),
+                            post.deviceToken!.trim(),
+                          );
+
+                          debugPrint(post.deviceToken!);
+                        },
                         title: post.name ?? "",
                         subtitle: post.email!,
                         messageCount: null,

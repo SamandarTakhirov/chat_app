@@ -13,12 +13,13 @@ class UserModel {
     required this.deviceToken,
   });
 
-  UserModel copyWith(
-          {String? uid,
-          String? name,
-          String? email,
-          String? password,
-          String? deviceToken}) =>
+  UserModel copyWith({
+    String? uid,
+    String? name,
+    String? email,
+    String? password,
+    String? deviceToken,
+  }) =>
       UserModel(
         uid: this.uid,
         name: this.name,

@@ -54,13 +54,18 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
     );
     if (textEditingController.text.isNotEmpty) {
       repository.createMessage(message);
+
       notificationRepository.sendNotification(
         body: textEditingController.text.trim(),
-        title: AuthService.auth.currentUser!.displayName!,
         token: widget.token,
+        title: AuthService.auth.currentUser!.displayName!,
       );
     }
+    print(widget.token);
     textEditingController.text = "";
+    setState(() {
+      isTexting = false;
+    });
   }
 
   void editPost(MessageModel message) async {
