@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:developer' as devtools show log;
 
-import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -127,9 +126,7 @@ class NotificationService {
       request.headers.add('Content-Type', 'application/json; charset=UTF-8');
       request.headers.add(
         'Authorization',
-        'Bearer AAAAnG85VTk:APA91bEQRnS3jt-lXdS0RZ6YTAzlZ9wyCej-'
-            '1H0sMkiIeptiiwncd8MdXlkcrBNaFjuaiS20zkTZ73_lfeXmOk1dM'
-            'HcM8StjzhVqqj124o3rNfRXqB7v2N1uq_FIs3zQzudWJQ6eRKsJ',
+        'Bearer AAAAnG85VTk:APA91bEQRnS3jt-lXdS0RZ6YTAzlZ9wyCej-1H0sMkiIeptiiwncd8MdXlkcrBNaFjuaiS20zkTZ73_lfeXmOk1dMHcM8StjzhVqqj124o3rNfRXqB7v2N1uq_FIs3zQzudWJQ6eRKsJ',
       );
 
       request.write(jsonEncode(
