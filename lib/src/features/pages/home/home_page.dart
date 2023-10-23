@@ -174,7 +174,6 @@ class _HomePageState extends State<HomePage> {
                             post.deviceToken!.trim(),
                           );
 
-                          debugPrint(post.deviceToken!);
                         },
                         title: post.name ?? "",
                         subtitle: post.email!,

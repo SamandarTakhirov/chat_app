@@ -21,11 +21,11 @@ class _AllAccountState extends State<AllAccount> {
   late IMessageRepository repositoryMessage;
   late IUserRepository repositoryUser;
 
-  void openChatPage(String name, String id) => Navigator.push(
+  void openChatPage(String name, String id, String token) => Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => ChatScreen(
-            token: "",
+            token: token,
             name: name,
             id: id,
           ),
@@ -57,17 +57,19 @@ class _AllAccountState extends State<AllAccount> {
           IconButton(
             style: IconButton.styleFrom(),
             onPressed: () {
-              ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(
-                const SnackBar(
-                  closeIconColor: Colors.white,
-                  showCloseIcon: true,
-                  backgroundColor: Color(0xFF037EE5),
-                  behavior: SnackBarBehavior.floating,
-                  dismissDirection: DismissDirection.startToEnd,
-                  content: Text("Will update soon..."),
-                  duration: Duration(seconds: 4),
-                ),
-              );
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(
+                    closeIconColor: Colors.white,
+                    showCloseIcon: true,
+                    backgroundColor: Color(0xFF037EE5),
+                    behavior: SnackBarBehavior.floating,
+                    dismissDirection: DismissDirection.startToEnd,
+                    content: Text("Will update soon..."),
+                    duration: Duration(seconds: 4),
+                  ),
+                );
             },
             icon: const Icon(
               Icons.add,
@@ -100,6 +102,7 @@ class _AllAccountState extends State<AllAccount> {
                       onTap: () => openChatPage(
                         post.name!,
                         id.join(),
+                        post.deviceToken!,
                       ),
                       title: post.name ?? "",
                       subtitle: "last seen recently",

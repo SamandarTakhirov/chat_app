@@ -1,21 +1,20 @@
-
-
-
-
 import '../../common/service/notification_service.dart';
-
-
 
 abstract interface class INotificationRepository {
   final String chatPath;
 
   const INotificationRepository(this.chatPath);
 
-  Future<void> sendNotification({ required String body,required String token,required String title});
+  Future<void> sendNotification({
+    required String body,
+    required String token,
+    required String title,
+  });
 }
 
 class NotificationRepository extends INotificationRepository {
-   NotificationRepository(super.chatPath) : _serviceNotification = NotificationService();
+  NotificationRepository(super.chatPath)
+      : _serviceNotification = NotificationService();
   final NotificationService _serviceNotification;
 
   @override
@@ -23,7 +22,7 @@ class NotificationRepository extends INotificationRepository {
     required String body,
     required String token,
     required String title,
-  } ) =>
+  }) =>
       _serviceNotification.sendNotification(
         body: body,
         token: token,
