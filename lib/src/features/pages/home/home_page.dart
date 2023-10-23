@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   void openChatPage(String name, String id) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ChatScreen(name: name, id: id, ),
+          builder: (context) => ChatScreen(name: name, id: id),
         ),
       );
 
@@ -47,16 +47,16 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         toolbarHeight: 60,
         backgroundColor: Colors.white,
-        leading: TextButton(
-          style: TextButton.styleFrom(),
-          onPressed: () {},
-          child: Text(
-            "Edit",
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: const Color(0xFF037EE5),
-                ),
-          ),
-        ),
+        // leading: TextButton(
+        //   style: TextButton.styleFrom(),
+        //   onPressed: () {},
+        //   child: Text(
+        //     "Edit",
+        //     style: Theme.of(context).textTheme.titleMedium?.copyWith(
+        //           color: const Color(0xFF037EE5),
+        //         ),
+        //   ),
+        // ),
         centerTitle: true,
         title: Text(
           "Chats",
@@ -68,7 +68,19 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             style: IconButton.styleFrom(),
-            onPressed: () {},
+            onPressed: () {
+              ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(
+                const SnackBar(
+                  closeIconColor: Colors.white,
+                  showCloseIcon: true,
+                  backgroundColor: Color(0xFF037EE5),
+                  behavior: SnackBarBehavior.floating,
+                  dismissDirection: DismissDirection.startToEnd,
+                  content: Text("Will update soon..."),
+                  duration: Duration(seconds: 4),
+                ),
+              );
+            },
             icon: const Image(
               image: AssetImage("assets/images/ic_edit.png"),
               width: 22,
@@ -76,39 +88,54 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
-        bottom: const PreferredSize(
-          preferredSize: Size(355, 36),
-          child: SizedBox(
-            width: 355,
-            height: 36,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: Color(0x1F767680),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+        bottom:  PreferredSize(
+          preferredSize: const Size(355, 36),
+          child: GestureDetector(
+            onTap: () {
+              ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(
+                const SnackBar(
+                  closeIconColor: Colors.white,
+                  showCloseIcon: true,
+                  backgroundColor: Color(0xFF037EE5),
+                  behavior: SnackBarBehavior.floating,
+                  dismissDirection: DismissDirection.startToEnd,
+                  content: Text("Will update soon..."),
+                  duration: Duration(seconds: 4),
                 ),
-              ),
-              child: Center(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Image(
-                        width: 15,
-                        height: 15,
-                        image: AssetImage("assets/images/ic_search.png"),
+              );
+            },
+            child: const SizedBox(
+              width: 355,
+              height: 36,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Color(0x1F767680),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+                child: Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Image(
+                          width: 15,
+                          height: 15,
+                          image: AssetImage("assets/images/ic_search.png"),
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Search for messages or users",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 17,
-                        color: Color(0xFF3C3C43),
+                      Text(
+                        "Search for messages or users",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: Color(0xFF3C3C43),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -123,7 +150,6 @@ class _HomePageState extends State<HomePage> {
             );
 
             final id = [post.uid, AuthService.auth.currentUser!.uid]..sort();
-            
             return post.email != AuthService.auth.currentUser!.email
                 ? Column(
                     children: [
@@ -142,11 +168,10 @@ class _HomePageState extends State<HomePage> {
                           id.join(),
                         ),
                         title: post.name ?? "",
-                        subtitle: post.email!,
-                        messageCount: 33,
-                        messageTime: DateTime.now().minute,
+                        subtitle: post.email,
+                        messageCount: null,
+                        messageTime: null,
                       ),
-
                       const Padding(
                         padding: EdgeInsets.only(left: 80.0),
                         child: SizedBox(
@@ -160,10 +185,8 @@ class _HomePageState extends State<HomePage> {
                     ],
                   )
                 : const SizedBox.shrink();
-
           },
           query: repositoryUser.queryUser(),
-
         ),
       ),
     );

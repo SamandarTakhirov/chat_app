@@ -55,7 +55,19 @@ class _AllAccountState extends State<AllAccount> {
         actions: [
           IconButton(
             style: IconButton.styleFrom(),
-            onPressed: () {},
+            onPressed: () {
+              ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(
+                const SnackBar(
+                  closeIconColor: Colors.white,
+                  showCloseIcon: true,
+                  backgroundColor: Color(0xFF037EE5),
+                  behavior: SnackBarBehavior.floating,
+                  dismissDirection: DismissDirection.startToEnd,
+                  content: Text("Will update soon..."),
+                  duration: Duration(seconds: 4),
+                ),
+              );
+            },
             icon: const Icon(
               Icons.add,
               color: Color(0xFF007AFF),
