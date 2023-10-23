@@ -25,6 +25,7 @@ class _AllAccountState extends State<AllAccount> {
         context,
         MaterialPageRoute(
           builder: (context) => ChatScreen(
+            token: "",
             name: name,
             id: id,
           ),

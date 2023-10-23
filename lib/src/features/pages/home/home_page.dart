@@ -20,10 +20,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late IUserRepository repositoryUser;
 
-  void openChatPage(String name, String id) => Navigator.push(
+  void openChatPage(String name, String id, String token) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ChatScreen(name: name, id: id),
+          builder: (context) => ChatScreen(name: name, id: id,token: token),
         ),
       );
 
@@ -166,6 +166,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () => openChatPage(
                           post.name!,
                           id.join(),
+                          post.deviceToken!,
                         ),
                         title: post.name ?? "",
                         subtitle: post.email!,

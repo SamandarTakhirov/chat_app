@@ -18,8 +18,10 @@ import 'widgets/write_text.dart';
 class ChatScreen extends StatefulWidget {
   final String name;
   final String id;
+  final String token;
 
   const ChatScreen({
+    required this.token,
     required this.id,
     required this.name,
     super.key,
@@ -45,21 +47,21 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
     super.initState();
   }
 
-  // Future<void> sendMessage() async {
-  //   final message = MessageModel(
-  //     userId: AuthService.auth.currentUser!.uid,
-  //     message: textEditingController.text.trim(),
-  //   );
-  //   if (textEditingController.text.isNotEmpty) {
-  //     repository.createMessage(message);
-  //     notificationRepository.sendNotification(
-  //       body: textEditingController.text.trim(),
-  //       title: AuthService.auth.currentUser!.displayName!,
-  //       token: "sd",
-  //     );
-  //   }
-  //   textEditingController.text = "";
-  // }
+  Future<void> sendMessage() async {
+    final message = MessageModel(
+      userId: AuthService.auth.currentUser!.uid,
+      message: textEditingController.text.trim(),
+    );
+    if (textEditingController.text.isNotEmpty) {
+      repository.createMessage(message);
+      notificationRepository.sendNotification(
+        body: textEditingController.text.trim(),
+        title: AuthService.auth.currentUser!.displayName!,
+        token: widget.token,
+      );
+    }
+    textEditingController.text = "";
+  }
 
   void editPost(MessageModel message) async {
     final editMessage = MessageModel(
@@ -382,28 +384,7 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {
-                        final message = MessageModel(
-                          userId: AuthService.auth.currentUser!.uid,
-                          message: textEditingController.text.trim(),
-                        );
-                        if (textEditingController.text.isNotEmpty) {
-                          repository.createMessage(message);
-                          notificationRepository.sendNotification(
-                              body: textEditingController.text.trim(),
-                              title: AuthService.auth.currentUser!.displayName!,
-                              token: " "
-                              // token:"fg9JSmZ7RoWk79m6Sj3wWr:APA91bHTbFlzwfgmyrIXoCbefH4sqfGG5Zj5Pp7EE5DcTXMLKJkO-cFQEgGXm_Xka6p7GCUxMUlsy1RrD-1uKNk1PJeuAJP7cA-t_usXg_E4vMP0re_xa1pHlQAAII11KIlSz-iafBbD",
-                              // token: "${NotificationService()
-                              //   ..requestPermisson()
-                              //   ..generateToken()}"
-                              // token: userModel.deviceToken != null
-                              //     ? userModel.deviceToken!
-                              //     : "  ",
-                              );
-                        }
-                        textEditingController.text = "";
-                      },
+                      onPressed: sendMessage,
                       icon: Image(
                         width: 30,
                         height: 30,
