@@ -1,5 +1,5 @@
-
 import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
+import 'package:chat_application_with_firebase/src/common/service/ios_notification_service.dart';
 import 'package:chat_application_with_firebase/src/features/data/notification_repository.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -11,6 +11,10 @@ import 'package:flutter/material.dart';
 import '../home/widgets/account_photo.dart';
 import 'widgets/chat_mixin.dart';
 import 'widgets/write_text.dart';
+
+//  "dKbsgpiiZk11lhpX2JIKCF:APA91bFhjkr2zmF8kCEIucnCEVP2hebG6vkCy"
+//             "8aH_cGlCKG7ebeLv3nJRYvUa7R9upEjfbkP8o8I3tv2mJ8RuIzOBtkj"
+//             "-V5NcIy7-O93Aszkx1r62rIzHhJZSl_Sdl-j6b3UCMX0FjhP",
 
 class ChatScreen extends StatefulWidget {
   final String name;
@@ -26,7 +30,7 @@ class ChatScreen extends StatefulWidget {
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> with ChatMixin{
+class _ChatScreenState extends State<ChatScreen> with ChatMixin {
   @override
   late IMessageRepository repository;
   late INotificationRepository notificationRepository;
@@ -49,10 +53,15 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin{
     if (textEditingController.text.isNotEmpty) {
       repository.createMessage(message);
       notificationRepository.sendNotification(
-        message.id,
-        "c71DJET4RheDI4Bi0TfYts:APA91bH1G_r4S4qjH9GSuLpmR4E5CWnsL1L1eRE-gya7C1FdaDpoYFshLTzjupbQquaqAjZtK6qfGsSE0BeAEM4_MvzFe2nBda4poa7PenJwEDQ_BBZVVIQCpDkfjFcKp1KiQwfSmhsb",
-        textEditingController.text.trim(),
+        body: textEditingController.text.trim(),
+        token: AuthService.user!.refreshToken!,
+        title: AuthService.auth.currentUser!.displayName!,
+
+
       );
+
+      print(AuthService.user!.refreshToken!);
+
     }
     textEditingController.text = "";
   }
@@ -96,7 +105,7 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin{
           onTap: () => setState(() {
             Navigator.pop(context);
           }),
-          child:  Padding(
+          child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
               children: [
@@ -107,7 +116,7 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin{
                 Text(
                   "Chats",
                   style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Color(0xFF037EE5),
                   ),
@@ -127,7 +136,7 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin{
                 fontWeight: FontWeight.w600,
               ),
             ),
-             Text(
+            const Text(
               "last seen just now",
               style: TextStyle(
                 fontSize: 13,
@@ -136,7 +145,7 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin{
             ),
           ],
         ),
-        actions:  [
+        actions: const [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: AccountPhoto(),
@@ -145,7 +154,7 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin{
       ),
       body: Stack(
         children: [
-           Image(
+          const Image(
             image: AssetImage("assets/images/bkg.jpg"),
             fit: BoxFit.cover,
             width: double.infinity,
@@ -176,8 +185,8 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin{
                     minWidth: size.width * 0.5,
                   ),
                   child: Padding(
-                    padding:  EdgeInsets.symmetric(
-                        vertical: 3.0, horizontal: 10),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
                     child: Align(
                       alignment:
                           post.userId != AuthService.auth.currentUser!.uid
@@ -351,8 +360,7 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin{
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      onPressed: () =>
-                        getMedia(MediaSource.gallery),
+                      onPressed: () => getMedia(MediaSource.gallery),
                       icon: const Image(
                         image: AssetImage("assets/images/ic_send.png"),
                         width: 30,
@@ -398,5 +406,3 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin{
     );
   }
 }
-
-

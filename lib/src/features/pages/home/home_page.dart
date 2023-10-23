@@ -1,4 +1,5 @@
 import 'package:chat_application_with_firebase/src/common/model/user_model.dart';
+import 'package:chat_application_with_firebase/src/common/service/ios_notification_service.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -125,8 +126,8 @@ class _HomePageState extends State<HomePage> {
             final id = [post.uid, AuthService.auth.currentUser!.uid]..sort();
             return post.email != AuthService.auth.currentUser!.email
                 ? Column(
-                  children: [
-                    MyListTile(
+                    children: [
+                      MyListTile(
                         widget: CircleAvatar(
                           maxRadius: 25,
                           minRadius: 25,
@@ -145,21 +146,24 @@ class _HomePageState extends State<HomePage> {
                         messageCount: 33,
                         messageTime: DateTime.now().minute,
                       ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 80.0),
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 1,
-                        child: ColoredBox(
-                          color: Color(0xFFD8D8D8),
+
+                      const Padding(
+                        padding: EdgeInsets.only(left: 80.0),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 1,
+                          child: ColoredBox(
+                            color: Color(0xFFD8D8D8),
+                          ),
                         ),
-                      ),
-                    )
-                  ],
-                )
+                      )
+                    ],
+                  )
                 : const SizedBox.shrink();
+
           },
           query: repositoryUser.queryUser(),
+
         ),
       ),
     );

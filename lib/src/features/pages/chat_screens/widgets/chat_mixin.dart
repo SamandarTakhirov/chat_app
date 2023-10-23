@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../common/model/message_model.dart';
 import '../../../../common/service/auth_service.dart';
-import '../../../controller/ChatProvider.dart';
+import '../../../controller/chat_provider.dart';
 import '../chat_screen.dart';
 
 mixin ChatMixin on State<ChatScreen> {

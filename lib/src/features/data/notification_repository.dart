@@ -7,7 +7,7 @@ abstract interface class INotificationRepository {
 
   const INotificationRepository(this.chatPath);
 
-  Future<void> sendNotification(String body, String token, String title);
+  Future<void> sendNotification({ required String body,required String token,required String title});
 }
 
 class NotificationRepository extends INotificationRepository {
@@ -15,11 +15,11 @@ class NotificationRepository extends INotificationRepository {
   final NotificationService _serviceNotification;
 
   @override
-  Future<void> sendNotification(
-    String body,
-    String token,
-    String title,
-  ) =>
+  Future<void> sendNotification({
+    required String body,
+    required String token,
+    required String title,
+  } ) =>
       _serviceNotification.sendNotification(
         body: body,
         token: token,

@@ -1,6 +1,5 @@
 import UIKit
 import Flutter
-// This is required for calling FlutterLocalNotificationsPlugin.setPluginRegistrantCallback method.
 import flutter_local_notifications
 
 @UIApplicationMain
@@ -13,9 +12,12 @@ import flutter_local_notifications
     FlutterLocalNotificationsPlugin.setPluginRegistrantCallback { (registry) in
     GeneratedPluginRegistrant.register(with: registry)
     }
-
+     if #available(iOS 12.0, *) {
+       UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+     }
 
     GeneratedPluginRegistrant.register(with: self)
+
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
   }
