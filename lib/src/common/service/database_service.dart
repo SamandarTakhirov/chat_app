@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:chat_application_with_firebase/src/common/model/user_model.dart';
+import 'package:chat_application_with_firebase/src/common/service/notification_service.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -40,8 +41,12 @@ class DatabaseService {
       String email, String password, String username, String uid) async {
     try {
       final folder = _database.ref(ApiConsts.userPath).child(uid);
-      final member =
-          UserModel(uid: uid, name: username, email: email, password: password);
+      final member = UserModel(
+          uid: uid,
+          name: username,
+          email: email,
+          password: password,
+          deviceToken: "${NotificationService()..fcmToken}");
       await folder.set(member.toJson());
       return true;
     } catch (e) {

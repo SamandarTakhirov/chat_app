@@ -1,5 +1,4 @@
 import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
-import 'package:chat_application_with_firebase/src/common/service/ios_notification_service.dart';
 import 'package:chat_application_with_firebase/src/features/data/notification_repository.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -35,6 +34,7 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
   late IMessageRepository repository;
   late INotificationRepository notificationRepository;
   late TextEditingController textEditingController;
+
   bool isTexting = false;
 
   @override
@@ -53,15 +53,11 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
     if (textEditingController.text.isNotEmpty) {
       repository.createMessage(message);
       notificationRepository.sendNotification(
-        body: textEditingController.text.trim(),
-        token: AuthService.user!.refreshToken!,
-        title: AuthService.auth.currentUser!.displayName!,
-
-
-      );
+          body: textEditingController.text.trim(),
+          title: AuthService.auth.currentUser!.displayName!,
+          token: "sd");
 
       print(AuthService.user!.refreshToken!);
-
     }
     textEditingController.text = "";
   }
@@ -185,8 +181,8 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
                     minWidth: size.width * 0.5,
                   ),
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 3.0, horizontal: 10),
                     child: Align(
                       alignment:
                           post.userId != AuthService.auth.currentUser!.uid
