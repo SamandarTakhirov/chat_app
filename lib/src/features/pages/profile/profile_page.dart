@@ -1,4 +1,5 @@
 import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../auth/login/login_page.dart';
@@ -111,6 +112,63 @@ class ProfilePage extends StatelessWidget {
             ),
             ProfileListTile(
               onTap: () {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    const SnackBar(
+                      closeIconColor: Colors.white,
+                      showCloseIcon: true,
+                      backgroundColor: Color(0xFF037EE5),
+                      behavior: SnackBarBehavior.floating,
+                      dismissDirection: DismissDirection.startToEnd,
+                      content: Text("Will update soon..."),
+                      duration: Duration(seconds: 4),
+                    ),
+                  );
+              },
+              icons: CupertinoIcons.arrow_down_doc,
+              text: "Saved Messages",
+            ),
+            ProfileListTile(
+              onTap: () {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    const SnackBar(
+                      closeIconColor: Colors.white,
+                      showCloseIcon: true,
+                      backgroundColor: Color(0xFF037EE5),
+                      behavior: SnackBarBehavior.floating,
+                      dismissDirection: DismissDirection.startToEnd,
+                      content: Text("Will update soon..."),
+                      duration: Duration(seconds: 4),
+                    ),
+                  );
+              },
+              icons: Icons.notifications_active_outlined,
+              text: "Notification settings",
+            ),
+            ProfileListTile(
+              onTap: () {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    const SnackBar(
+                      closeIconColor: Colors.white,
+                      showCloseIcon: true,
+                      backgroundColor: Color(0xFF037EE5),
+                      behavior: SnackBarBehavior.floating,
+                      dismissDirection: DismissDirection.startToEnd,
+                      content: Text("Will update soon..."),
+                      duration: Duration(seconds: 4),
+                    ),
+                  );
+              },
+              icons: CupertinoIcons.globe,
+              text: "Language",
+            ),
+            ProfileListTile(
+              onTap: () {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -118,7 +176,7 @@ class ProfilePage extends StatelessWidget {
                     ));
                 AuthService.logOut();
               },
-              icons: Icons.logout,
+              icons: Icons.logout_outlined,
               text: "Log out",
             ),
             ProfileListTile(
@@ -130,7 +188,7 @@ class ProfilePage extends StatelessWidget {
                     ));
                 AuthService.deleteAccount();
               },
-              icons: Icons.delete,
+              icons: CupertinoIcons.delete,
               text: "Delete account",
             ),
             const SizedBox(height: 100),
