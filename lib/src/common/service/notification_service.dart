@@ -6,6 +6,8 @@ import 'dart:developer' as devtools show log;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+late String $deviceToken;
+
 extension Log on Object {
   void log() => devtools.log(toString());
 }
@@ -49,7 +51,9 @@ class NotificationService {
 
     print(
         '------------------------------------------------------------------------');
+
     print(fcmToken);
+    $deviceToken = fcmToken!;
     print(
         '------------------------------------------------------------------------');
   }
@@ -177,7 +181,8 @@ Future<void> _showNotification(RemoteMessage message) async {
       priority: Priority.high,
       playSound: true,
       fullScreenIntent: true,
-      // sound: RawResourceAndroidNotificationSound('notification_sound'), // you need to add android -> app -> src -> main -> res -> "raw" new folder
+      sound: RawResourceAndroidNotificationSound(
+          'notification_sound'), // you need to add android -> app -> src -> main -> res -> "raw" new folder
     );
 
     const platformChannelSpecifics = NotificationDetails(
@@ -195,6 +200,4 @@ Future<void> _showNotification(RemoteMessage message) async {
       payload: message.data.toString(),
     );
   }
-
-
 }
