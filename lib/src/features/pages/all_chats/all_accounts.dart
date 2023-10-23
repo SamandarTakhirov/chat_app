@@ -24,7 +24,10 @@ class _AllAccountState extends State<AllAccount> {
   void openChatPage(String name, String id) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ChatScreen(name: name, id: id),
+          builder: (context) => ChatScreen(
+            name: name,
+            id: id,
+          ),
         ),
       );
 
@@ -99,10 +102,9 @@ class _AllAccountState extends State<AllAccount> {
                       ),
                     ),
                     TextButton(
-                        onPressed: () =>
-                            IosNotificationService().showNotification(title: "zzz"),
+                        onPressed: () => IosNotificationService()
+                            .showNotification(title: "zzz"),
                         child: Text("Test")),
-
                   ],
                 )
               : const SizedBox.shrink();

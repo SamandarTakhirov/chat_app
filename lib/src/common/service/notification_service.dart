@@ -161,6 +161,11 @@ class NotificationService {
       client.close();
     }
   }
+
+  @override
+  String toString() {
+    return 'NotificationService{fcmToken: $fcmToken}';
+  }
 }
 
 Future<void> _showNotification(RemoteMessage message) async {
@@ -190,4 +195,6 @@ Future<void> _showNotification(RemoteMessage message) async {
       payload: message.data.toString(),
     );
   }
+
+
 }

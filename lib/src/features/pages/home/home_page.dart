@@ -1,5 +1,4 @@
 import 'package:chat_application_with_firebase/src/common/model/user_model.dart';
-import 'package:chat_application_with_firebase/src/common/service/ios_notification_service.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -24,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   void openChatPage(String name, String id) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ChatScreen(name: name, id: id),
+          builder: (context) => ChatScreen(name: name, id: id, ),
         ),
       );
 
@@ -124,6 +123,7 @@ class _HomePageState extends State<HomePage> {
             );
 
             final id = [post.uid, AuthService.auth.currentUser!.uid]..sort();
+            
             return post.email != AuthService.auth.currentUser!.email
                 ? Column(
                     children: [
@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                           id.join(),
                         ),
                         title: post.name ?? "",
-                        subtitle: post.email,
+                        subtitle: post.email!,
                         messageCount: 33,
                         messageTime: DateTime.now().minute,
                       ),

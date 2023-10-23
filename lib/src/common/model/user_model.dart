@@ -1,9 +1,9 @@
 class UserModel {
-  final String uid;
+  final String? uid;
   final String? name;
-  final String email;
-  final String deviceToken;
-  final String password;
+  final String? email;
+  final String? deviceToken;
+  final String? password;
 
   const UserModel({
     required this.uid,
@@ -28,11 +28,11 @@ class UserModel {
       );
 
   factory UserModel.fromJson(Map<String, Object?> json) => UserModel(
-        uid: json["uid"] as String,
-        name: json["name"] as String,
-        email: json["email"] as String,
-        password: json["password"] as String,
-        deviceToken: json["deviceToken"] as String,
+        uid: json["uid"] as String?,
+        name: json["name"] as String?,
+        email: json["email"] as String?,
+        password: json["password"] as String?,
+        deviceToken: json["device_token"] as String?,
       );
 
   Map<String, Object?> toJson() => <String, Object?>{
@@ -40,7 +40,7 @@ class UserModel {
         "name": name,
         "email": email,
         "password": password,
-        "deviceToken":deviceToken,
+        "device_token": deviceToken,
       };
 
   @override
@@ -48,7 +48,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel{u id: $uid, name: $name, email: $email, password: $password}';
+    return 'UserModel{ uid: $uid, name: $name, email: $email, password: $password}';
   }
 
   @override

@@ -46,7 +46,7 @@ class DatabaseService {
           name: username,
           email: email,
           password: password,
-          deviceToken: "${NotificationService()..fcmToken}");
+          deviceToken: "${NotificationService()..generateToken()}");
       await folder.set(member.toJson());
       return true;
     } catch (e) {
