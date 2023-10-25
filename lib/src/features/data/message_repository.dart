@@ -53,7 +53,7 @@ class MessageRepository extends IMessageRepository {
   @override
   Future<void> updateMessage(MessageModel message) => _service.update(
         dataPath: ApiConsts.messagePath(chatPath),
-        id: message.id,
+        id: message.id!,
         json: message.toJson(),
       );
 }

@@ -38,7 +38,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => const HomePage(
+            id: '',
+          ),
         ),
       );
     }

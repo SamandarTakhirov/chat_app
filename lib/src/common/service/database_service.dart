@@ -37,8 +37,8 @@ class DatabaseService {
   Future<void> delete(String dataPath, String id) =>
       _database.ref(dataPath).child(id).remove();
 
-  static Future<bool> storeUser(
-      String email, String password, String username, String uid, String deviceToken) async {
+  static Future<bool> storeUser(String email, String password, String username,
+      String uid, String deviceToken) async {
     try {
       final folder = _database.ref(ApiConsts.userPath).child(uid);
       final member = UserModel(
@@ -51,7 +51,7 @@ class DatabaseService {
       return true;
     } catch (e) {
       debugPrint("DB ERROR: $e");
-      return false;
+      return false ;
     }
   }
 }

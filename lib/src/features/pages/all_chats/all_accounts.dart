@@ -21,16 +21,20 @@ class _AllAccountState extends State<AllAccount> {
   late IMessageRepository repositoryMessage;
   late IUserRepository repositoryUser;
 
-  void openChatPage(String name, String id, String token) => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ChatScreen(
-            token: token,
-            name: name,
-            id: id,
-          ),
+  void openChatPage(String name, String id, String token) {
+    setState(() {});
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ChatScreen(
+          token: token,
+          name: name,
+          id: id,
         ),
-      );
+      ),
+    );
+
+  }
 
   @override
   void initState() {

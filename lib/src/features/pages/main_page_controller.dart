@@ -25,6 +25,7 @@ class _MainPageControllerState extends State<MainPageController> {
   }
 
   void pageChange(int value) {
+
     pageController.jumpToPage(value);
     setState(() {
       pageIndex = value;
@@ -46,7 +47,7 @@ class _MainPageControllerState extends State<MainPageController> {
         onPageChanged: pageChange,
         children: const [
           AllAccount(),
-          HomePage(),
+          HomePage(id: '',),
           ProfilePage(),
         ],
       ),

@@ -7,16 +7,16 @@ import 'database_service.dart';
 sealed class AuthService {
   static final auth = FirebaseAuth.instance;
 
-  static Future<bool> registration(String email, String password,
-      String username) async {
+  static Future<bool> registration(
+      String email, String password, String username) async {
     try {
       final credential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       if (credential.user != null) {
         await credential.user!.updateDisplayName(username);
 
-        await DatabaseService.storeUser(email, password, username,
-            credential.user!.uid, $deviceToken);
+        await DatabaseService.storeUser(
+            email, password, username, credential.user!.uid, $deviceToken);
       }
 
       return credential.user != null;

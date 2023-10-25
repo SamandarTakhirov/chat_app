@@ -1,7 +1,10 @@
 import 'package:chat_application_with_firebase/src/common/model/user_model.dart';
+import 'package:chat_application_with_firebase/src/common/service/notification_service.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../../common/model/message_model.dart';
+import '../../data/message_repository.dart';
 import '../../data/user_repository.dart';
 import '../profile/profile_page.dart';
 import '/src/common/service/auth_service.dart';
@@ -11,7 +14,9 @@ import '../chat_screens/chat_screen.dart';
 import 'widgets/my_listtile.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final String id;
+
+  const HomePage({Key? key, required this.id}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -19,6 +24,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late IUserRepository repositoryUser;
+  late IMessageRepository repository;
 
   void openChatPage(String name, String id, String token) => Navigator.push(
         context,
@@ -37,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     repositoryUser = const UserRepository();
+    repository = MessageRepository(widget.id);
     super.initState();
   }
 
@@ -152,9 +159,16 @@ class _HomePageState extends State<HomePage> {
             final post = UserModel.fromJson(
               Map<String, Object?>.from(snapshot.value as Map),
             );
+            final message = MessageModel.fromJson(
+              Map<String, Object?>.from(snapshot.value as Map),
+            );
 
             final id = [post.uid, AuthService.auth.currentUser!.uid]..sort();
-            return post.email != AuthService.auth.currentUser!.email
+            print(id);
+            print((post.email != AuthService.auth.currentUser!.email &&
+                id.contains(message.usersId)));
+            print(message.id);
+            return (post.email != AuthService.auth.currentUser!.email)
                 ? Column(
                     children: [
                       MyListTile(
@@ -173,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                             id.join(),
                             post.deviceToken!.trim(),
                           );
-
+                          $userToken = post.deviceToken!;
                         },
                         title: post.name ?? "",
                         subtitle: post.email!,

@@ -40,6 +40,7 @@ mixin ChatMixin on State<ChatScreen> {
 
   void updateMessage() {
     final message = MessageModel(
+      usersId: widget.id,
       userId: AuthService.auth.currentUser!.uid,
       id: Provider.of<ChatProvider>(context, listen: false).defineChat!.id,
       message: controller.text,
