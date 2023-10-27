@@ -15,13 +15,13 @@ class MainPageController extends StatefulWidget {
 }
 
 class _MainPageControllerState extends State<MainPageController> {
-  int pageIndex = 0;
+  int pageIndex = 1;
   late final PageController pageController;
 
   @override
   void initState() {
     super.initState();
-    pageController = PageController();
+    pageController = PageController(initialPage: 1);
   }
 
   void pageChange(int value) {

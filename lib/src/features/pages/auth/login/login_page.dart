@@ -1,3 +1,4 @@
+import 'package:chat_application_with_firebase/src/features/pages/main_page_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/service/auth_service.dart';
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
     if (success) {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage(id: '',)),
+          MaterialPageRoute(builder: (context) => MainPageController()),
           (route) => false);
     }
   }

@@ -35,13 +35,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
       nameController.text,
     );
     if (success) {
-      Navigator.pushReplacement(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (context) => const HomePage(
             id: '',
           ),
         ),
+        (r) => false,
       );
     }
   }

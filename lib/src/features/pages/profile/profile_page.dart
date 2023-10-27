@@ -175,7 +175,7 @@ class ProfilePage extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => const LoginPage(),
                     ),
-                    (route) => true);
+                    (route) => false);
                 AuthService.logOut();
               },
               icons: Icons.logout_outlined,
