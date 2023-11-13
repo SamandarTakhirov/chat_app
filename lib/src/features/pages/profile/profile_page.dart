@@ -52,7 +52,7 @@ class ProfilePage extends StatelessWidget {
                                     dismissDirection:
                                         DismissDirection.startToEnd,
                                     content: Text("Will update soon..."),
-                                    duration: Duration(seconds: 4),
+                                    duration: Duration(seconds: 4), 
                                   ),
                                 );
                             },
