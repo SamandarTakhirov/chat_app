@@ -76,7 +76,8 @@ class ProfilePage extends StatelessWidget {
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
                         ),
-                      ),Text(
+                      ),
+                      Text(
                         AuthService.auth.currentUser!.email!,
                         style: const TextStyle(
                           color: Color(0xFF246BFD),
@@ -169,11 +170,12 @@ class ProfilePage extends StatelessWidget {
             ),
             ProfileListTile(
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const LoginPage(),
-                    ));
+                    ),
+                    (route) => true);
                 AuthService.logOut();
               },
               icons: Icons.logout_outlined,
@@ -181,11 +183,12 @@ class ProfilePage extends StatelessWidget {
             ),
             ProfileListTile(
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const RegistrationPage(),
-                    ));
+                    ),
+                    (route) => true);
                 AuthService.deleteAccount();
               },
               icons: CupertinoIcons.delete,
