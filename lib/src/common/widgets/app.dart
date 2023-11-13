@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../features/pages/auth/login/login_page.dart';
+import '../../features/pages/auth/registration/registration_page.dart';
 import '../../features/pages/main_page_controller.dart';
 import '../service/auth_service.dart';
 
@@ -15,8 +15,8 @@ class App extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       // ignore: unnecessary_null_comparison
-      home: (AuthService.auth.currentUser != null)
-          ? const LoginPage()
+      home: (AuthService.auth.currentUser == null)
+          ? const RegistrationPage()
           : const MainPageController(),
     );
   }

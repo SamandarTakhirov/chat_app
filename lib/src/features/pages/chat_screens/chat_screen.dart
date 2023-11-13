@@ -62,7 +62,6 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
         title: AuthService.auth.currentUser!.displayName!,
       );
     }
-    print(widget.token);
     textEditingController.text = "";
     setState(() {
       isTexting = false;
