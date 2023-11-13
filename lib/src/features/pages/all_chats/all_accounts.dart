@@ -121,10 +121,10 @@ class _AllAccountState extends State<AllAccount> {
                         ),
                       ),
                     ),
-                    TextButton(
-                        onPressed: () => IosNotificationService()
-                            .showNotification(title: "zzz"),
-                        child: Text("Test")),
+                    // TextButton(
+                    //     onPressed: () => IosNotificationService()
+                    //         .showNotification(title: "zzz"),
+                    //     child: Text("Test")),
                   ],
                 )
               : const SizedBox.shrink();

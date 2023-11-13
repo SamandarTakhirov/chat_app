@@ -1,7 +1,9 @@
+import 'package:chat_application_with_firebase/src/common/constants/api_const.dart';
 import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../common/service/database_service.dart';
 import '../auth/login/login_page.dart';
 import '../auth/registration/registration_page.dart';
 import '../home/widgets/account_photo.dart';
@@ -52,7 +54,7 @@ class ProfilePage extends StatelessWidget {
                                     dismissDirection:
                                         DismissDirection.startToEnd,
                                     content: Text("Will update soon..."),
-                                    duration: Duration(seconds: 4), 
+                                    duration: Duration(seconds: 4),
                                   ),
                                 );
                             },
@@ -190,6 +192,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                     (route) => true);
                 AuthService.deleteAccount();
+                const DatabaseService().delete(
+                    ApiConsts.userPath, AuthService.auth.currentUser!.uid);
               },
               icons: CupertinoIcons.delete,
               text: "Delete account",

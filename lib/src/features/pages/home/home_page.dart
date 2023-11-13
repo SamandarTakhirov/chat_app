@@ -175,10 +175,10 @@ class _HomePageState extends State<HomePage> {
             );
 
             final id = [post.uid, AuthService.auth.currentUser!.uid]..sort();
-            print(id);
+
             print((post.email != AuthService.auth.currentUser!.email &&
                 id.contains(message.usersId)));
-            print(message.id);
+            print(message.usersId);
             return (post.email != AuthService.auth.currentUser!.email)
                 ? Column(
                     children: [
