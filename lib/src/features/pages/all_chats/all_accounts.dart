@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../../../common/model/user_model.dart';
 import '../../../common/service/auth_service.dart';
-import '../../../common/service/ios_notification_service.dart';
 import '../../data/message_repository.dart';
 import '../../data/user_repository.dart';
 import '../chat_screens/chat_screen.dart';

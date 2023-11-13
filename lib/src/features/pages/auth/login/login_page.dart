@@ -2,7 +2,6 @@ import 'package:chat_application_with_firebase/src/features/pages/main_page_cont
 import 'package:flutter/material.dart';
 
 import '../../../../common/service/auth_service.dart';
-import '../../home/home_page.dart';
 import '../registration/registration_page.dart';
 import '../widgets/my_textfield.dart';
 
@@ -32,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
     if (success) {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => MainPageController()),
+          MaterialPageRoute(builder: (context) => const MainPageController()),
           (route) => false);
     }
   }

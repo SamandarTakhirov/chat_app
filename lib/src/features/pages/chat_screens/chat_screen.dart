@@ -62,7 +62,6 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
         title: AuthService.auth.currentUser!.displayName!,
       );
     }
-    print(widget.token);
     textEditingController.text = "";
     setState(() {
       isTexting = false;
@@ -203,71 +202,121 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
                                 showModalBottomSheet(
                                   context: context,
                                   builder: (context) {
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        post.userId ==
-                                                AuthService
-                                                    .auth.currentUser!.uid
-                                            ? IconButton(
-                                                onPressed: () =>
-                                                    showModalBottomSheet(
-                                                  context: context,
-                                                  builder: (context) => Padding(
-                                                    padding: EdgeInsets.only(
-                                                      bottom:
-                                                          MediaQuery.of(context)
-                                                              .viewInsets
-                                                              .bottom,
-                                                      top: 10,
-                                                      right: 10,
-                                                      left: 10,
-                                                    ),
-                                                    child: SizedBox(
-                                                      width: size.width,
-                                                      child: WriteText(
-                                                        onChanged: (text) {},
-                                                        suffixIcon: Padding(
+                                    return SizedBox(
+                                      width: double.infinity,
+                                      height: 100,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          post.userId ==
+                                                  AuthService
+                                                      .auth.currentUser!.uid
+                                              ? Row(
+                                                  children: [
+                                                    IconButton(
+                                                      onPressed: () =>
+                                                          showModalBottomSheet(
+                                                        context: context,
+                                                        builder: (context) =>
+                                                            Padding(
                                                           padding:
-                                                              const EdgeInsets
-                                                                  .all(3.0),
-                                                          child: IconButton(
-                                                            onPressed: () =>
-                                                                editPost(post),
-                                                            style: FilledButton
-                                                                .styleFrom(
-                                                              backgroundColor:
-                                                                  const Color(
-                                                                      0xFF246BFD),
-                                                            ),
-                                                            icon: const Icon(
-                                                              Icons.done,
-                                                              color:
-                                                                  Colors.white,
+                                                              EdgeInsets.only(
+                                                            bottom:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .viewInsets
+                                                                    .bottom + 10,
+                                                            top: 10,
+                                                            right: 10,
+                                                            left: 10,
+                                                          ),
+                                                          child: SizedBox(
+                                                            width: size.width,
+                                                            child: WriteText(
+                                                              onChanged:
+                                                                  (text) {},
+                                                              suffixIcon:
+                                                                  Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        3.0),
+                                                                child:
+                                                                    IconButton(
+                                                                  onPressed: () =>
+                                                                      editPost(
+                                                                    post,
+                                                                  ),
+                                                                  style: FilledButton
+                                                                      .styleFrom(
+                                                                    // fixedSize: const Size(20, 20),
+                                                                    maximumSize:  const Size(14, 14),
+                                                                    minimumSize:  const Size(14, 14),
+                                                                  ),
+                                                                  icon:
+                                                                      const Icon(
+                                                                       size: 24,
+                                                                    Icons.done,
+                                                                    color: Color(
+                                                                        0xFF246BFD),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              textEditingController:
+                                                                  textEditingController,
                                                             ),
                                                           ),
                                                         ),
-                                                        textEditingController:
-                                                            textEditingController,
+                                                      ),
+                                                      icon: const Row(
+                                                        children: [
+                                                          Icon(
+                                                            Icons.edit,
+                                                            color: Color(
+                                                                0xFF246BFD),
+                                                          ),
+                                                          SizedBox(width: 10),
+                                                          Text(
+                                                            "Edit Message",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontSize: 15,
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
+                                                  ],
+                                                )
+                                              : const SizedBox.shrink(),
+                                          IconButton(
+                                            onPressed: () =>
+                                                deletePost(post.id!),
+                                            icon: const Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.delete,
+                                                  color: Color(0xFFFF0000),
+                                                ),
+                                                SizedBox(width: 10),
+                                                Text(
+                                                  "Delete Message",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 15,
                                                   ),
                                                 ),
-                                                icon: const Icon(
-                                                  Icons.edit,
-                                                  color: Color(0xFF246BFD),
-                                                ),
-                                              )
-                                            : const SizedBox.shrink(),
-                                        IconButton(
-                                          onPressed: () => deletePost(post.id!),
-                                          icon: const Icon(
-                                            Icons.delete,
-                                            color: Color(0xFFFF0000),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     );
                                   },
                                 );
