@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,6 @@ class _MainPageControllerState extends State<MainPageController> {
   }
 
   void pageChange(int value) {
-
     pageController.jumpToPage(value);
     setState(() {
       pageIndex = value;
@@ -47,11 +45,14 @@ class _MainPageControllerState extends State<MainPageController> {
         onPageChanged: pageChange,
         children: const [
           AllAccount(),
-          HomePage(id: '',),
+          HomePage(
+            id: '',
+          ),
           ProfilePage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+
         backgroundColor: const Color(0xFFF6F6F6),
         currentIndex: pageIndex,
         selectedLabelStyle: const TextStyle(

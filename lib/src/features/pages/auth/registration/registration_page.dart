@@ -1,8 +1,8 @@
 import 'package:chat_application_with_firebase/src/common/service/auth_service.dart';
+import 'package:chat_application_with_firebase/src/features/pages/main_page_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../../../data/user_repository.dart';
-import '../../home/home_page.dart';
 import '../login/login_page.dart';
 import '../widgets/my_textfield.dart';
 
@@ -38,8 +38,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomePage(
-            id: '',
+          builder: (context) => const MainPageController(
           ),
         ),
         (r) => false,

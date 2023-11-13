@@ -203,7 +203,7 @@ class _ChatScreenState extends State<ChatScreen> with ChatMixin {
                                 showModalBottomSheet(
                                   context: context,
                                   builder: (context) {
-                                    return Row(
+                                    return Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
