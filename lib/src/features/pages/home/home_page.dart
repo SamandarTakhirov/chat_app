@@ -155,6 +155,17 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SafeArea(
         child: FirebaseAnimatedList(
+          sort: (a, b) {
+            final aValue = MessageModel.fromJson(
+              Map<String, Object?>.from(a.value as Map),
+            );
+
+            final bValue = MessageModel.fromJson(
+              Map<String, Object?>.from(b.value as Map),
+            );
+
+            return bValue.message!.compareTo(aValue.message!);
+          },
           itemBuilder: (context, snapshot, animation, index) {
             final post = UserModel.fromJson(
               Map<String, Object?>.from(snapshot.value as Map),
