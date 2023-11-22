@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,43 +49,21 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBYVCexU_z5G-JOFAMoR3gZhm9hqi_-ens',
-    appId: '1:671880926521:web:b93a8c9931c3625ec384e8',
-    messagingSenderId: '671880926521',
-    projectId: 'chat-app-cdc16',
-    authDomain: 'chat-app-cdc16.firebaseapp.com',
-    databaseURL: 'https://chat-app-cdc16-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'chat-app-cdc16.appspot.com',
-    measurementId: 'G-3Z60Z1XNNP',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB9ukUvOTm9DsgDhktIWVh1KulYcaGmZqU',
-    appId: '1:671880926521:android:021b0ceed1f3e543c384e8',
-    messagingSenderId: '671880926521',
-    projectId: 'chat-app-cdc16',
-    databaseURL: 'https://chat-app-cdc16-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'chat-app-cdc16.appspot.com',
+    apiKey: 'AIzaSyB37aSzQwR_RJatCxy9F7V5hcxSvy1pWqc',
+    appId: '1:867907366273:android:03f3e5c37621ae01cf0c80',
+    messagingSenderId: '867907366273',
+    projectId: 'whatsapp-backend-c4d7f',
+    storageBucket: 'whatsapp-backend-c4d7f.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyARuJb1qiAUE5YJ6X3be9w8700lDiiulk4',
-    appId: '1:671880926521:ios:859207b2d0129c0cc384e8',
-    messagingSenderId: '671880926521',
-    projectId: 'chat-app-cdc16',
-    databaseURL: 'https://chat-app-cdc16-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'chat-app-cdc16.appspot.com',
-    iosBundleId: 'dev.takhirov.chatApp1',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyARuJb1qiAUE5YJ6X3be9w8700lDiiulk4',
-    appId: '1:671880926521:ios:20b39eca9ea1dfa7c384e8',
-    messagingSenderId: '671880926521',
-    projectId: 'chat-app-cdc16',
-    databaseURL: 'https://chat-app-cdc16-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'chat-app-cdc16.appspot.com',
-    iosBundleId: 'dev.takhirov.chatApplicationWithFirebase.RunnerTests',
+    apiKey: 'AIzaSyBSDWRP0gJNvfu50pTKYfUqRDDEkQsQrUI',
+    appId: '1:867907366273:ios:6f8cdf10bb49ba7ecf0c80',
+    messagingSenderId: '867907366273',
+    projectId: 'whatsapp-backend-c4d7f',
+    storageBucket: 'whatsapp-backend-c4d7f.appspot.com',
+    iosClientId: '867907366273-j9hk7oisbdk70t3q3ri6n5qveuj30ohh.apps.googleusercontent.com',
+    iosBundleId: 'com.example.whatsappUi',
   );
 }
