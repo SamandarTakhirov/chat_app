@@ -8,7 +8,7 @@ void showSnackBar({required BuildContext context, required String content}) {
     SnackBar(
       content: Text(content),
     ),
-  );
+  ).close;
 }
 
 Future<File?> pickImageFromGallery(BuildContext context) async {
