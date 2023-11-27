@@ -2,7 +2,6 @@ import 'package:chat_application_with_firebase/router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'common/utils/colors.dart';
 import 'common/widgets/error.dart';
 import 'common/widgets/loader.dart';
@@ -46,6 +45,8 @@ class MyApp extends ConsumerWidget {
               return const MobileLayoutScreen();
             },
             error: (err, trace) {
+              print(err);
+              print(trace);
               return ErrorScreen(
                 error: err.toString(),
               );

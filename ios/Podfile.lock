@@ -668,8 +668,6 @@ PODS:
   - AgoraRtcEngine_iOS/VirtualBackground (4.2.6)
   - AgoraRtcEngine_iOS/VQA (4.2.6)
   - AgoraRtm_iOS (1.5.1)
-  - audioplayers_darwin (0.0.1):
-    - Flutter
   - BoringSSL-GRPC (0.0.24):
     - BoringSSL-GRPC/Implementation (= 0.0.24)
     - BoringSSL-GRPC/Interface (= 0.0.24)
@@ -911,7 +909,6 @@ DEPENDENCIES:
   - agora_rtc_engine (from `.symlinks/plugins/agora_rtc_engine/ios`)
   - agora_rtm (from `.symlinks/plugins/agora_rtm/ios`)
   - agora_uikit (from `.symlinks/plugins/agora_uikit/ios`)
-  - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
   - cached_video_player (from `.symlinks/plugins/cached_video_player/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - emoji_picker_flutter (from `.symlinks/plugins/emoji_picker_flutter/ios`)
@@ -975,8 +972,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/agora_rtm/ios"
   agora_uikit:
     :path: ".symlinks/plugins/agora_uikit/ios"
-  audioplayers_darwin:
-    :path: ".symlinks/plugins/audioplayers_darwin/ios"
   cached_video_player:
     :path: ".symlinks/plugins/cached_video_player/ios"
   cloud_firestore:
@@ -1022,7 +1017,6 @@ SPEC CHECKSUMS:
   AgoraIrisRTC_iOS: 8346499b82968a4967e3d0bec2cf14bf7c0c3f76
   AgoraRtcEngine_iOS: ac647332ad8f86d79cf810601c9e62b28c3a4de0
   AgoraRtm_iOS: 595a9fa33a409831e6183396ea8f8bc563918403
-  audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   cached_video_player: 9f225ed1c46bda0fe287b8288742329d441e2cc5
   cloud_firestore: 20bb019115acfc53278ed4c8bc5ddda77fc673bb
@@ -1072,6 +1066,6 @@ SPEC CHECKSUMS:
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
   video_player_avfoundation: 81e49bb3d9fb63dccf9fa0f6d877dc3ddbeac126
 
-PODFILE CHECKSUM: 6b9eb94e9f98a329f2ef624b852a6e42d090af2b
+PODFILE CHECKSUM: df6616f2db4205b4af18cbd9e3ac16ca7895221f
 
 COCOAPODS: 1.13.0
